@@ -1,0 +1,37 @@
+﻿<Application x:Class="UsersPanel.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:UsersPanel"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ControlTemplate TargetType="ToggleButton" x:Key="myButton">
+            <ControlTemplate.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition  Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsMouseOver}" Value="True"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Foreground" Value="Blue"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </MultiDataTrigger>
+            </ControlTemplate.Triggers>
+            <TextBlock HorizontalAlignment="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=HorizontalAlignment}">
+                <ContentPresenter/>
+            </TextBlock>
+        </ControlTemplate>
+
+        <ControlTemplate TargetType="Button" x:Key="myButton2">
+            <ControlTemplate.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition  Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsMouseOver}" Value="True"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Foreground" Value="Blue"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </MultiDataTrigger>
+            </ControlTemplate.Triggers>
+            <TextBlock HorizontalAlignment="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=HorizontalAlignment}">
+                <ContentPresenter/>
+            </TextBlock>
+        </ControlTemplate>
+    </Application.Resources>
+</Application>
