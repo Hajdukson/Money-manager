@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,16 +21,21 @@ namespace UsersPanel
     /// </summary>
     public partial class UserControl1 : UserControl
     {
+        Write write = new Write("database.txt");
         public UserControl1()
         {
             InitializeComponent();
         }
 
-        private void Create_button(object sender, RoutedEventArgs e)
+        private void Create_account_button(object sender, RoutedEventArgs e)
         {
             if (onUsernameBox.Text == "" || onPasswordBox.Password == "" ||
                 onRePasswordBox.Password == "" || emailBox.Text == "")
                 MessageBox.Show("Enter all data.", "Warning", MessageBoxButton.OK);
+            else if (onPasswordBox.Password != onRePasswordBox.Password)
+                MessageBox.Show("Passwords should be the same.", "Warning", MessageBoxButton.OK);
+            else
+                write.AddUser(onUsernameBox.Text, onPasswordBox.Password, emailBox.Text);
         }
     }
 }

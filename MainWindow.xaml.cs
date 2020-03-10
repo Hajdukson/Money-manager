@@ -25,7 +25,7 @@ namespace UsersPanel
             InitializeComponent();
         }
 
-        private void Log_in(object sender, RoutedEventArgs e)
+        private void Log_in_button(object sender, RoutedEventArgs e)
         {
             if (inUsernameBox.Text == "" || inPasswordBox.Password == "")
                 MessageBox.Show("Enter all data.", "Warning", MessageBoxButton.OK);

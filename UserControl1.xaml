@@ -40,7 +40,7 @@
                 <Label Width="70" >E-mail:</Label>
                 <TextBox Width="150" x:Name="emailBox"/>
             </WrapPanel>
-            <Button Template="{StaticResource myButton2}" HorizontalAlignment="Center" Click="Create_button">Create</Button>
+            <Button Template="{StaticResource myButton2}" HorizontalAlignment="Center" Click="Create_account_button">Create</Button>
         </StackPanel>
     </Grid>
 </UserControl>

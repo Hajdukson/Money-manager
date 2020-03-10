@@ -54,7 +54,7 @@
                 <Label Width="70" >Password:</Label>
                 <PasswordBox Width="150" x:Name="inPasswordBox"/>
             </WrapPanel>
-            <Button Content="Log in" Template="{StaticResource myButton2}" HorizontalAlignment="Center" Click="Log_in"></Button>
+            <Button Content="Log in" Template="{StaticResource myButton2}" HorizontalAlignment="Center" Click="Log_in_button"></Button>
             <ToggleButton Content="Create a new account" Template="{StaticResource myButton}" x:Name="toggleButtonToShowMenuCreatUser" HorizontalAlignment="Center"/>
             <local:UserControl1 Visibility="{Binding ElementName=toggleButtonToShowMenuCreatUser, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}"></local:UserControl1>
         </StackPanel>
