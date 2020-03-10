@@ -22,6 +22,7 @@ namespace UsersPanel
     public partial class UserControl1 : UserControl
     {
         Write write = new Write("database.txt");
+        Read read = new Read("database.txt");
         public UserControl1()
         {
             InitializeComponent();
@@ -35,7 +36,30 @@ namespace UsersPanel
             else if (onPasswordBox.Password != onRePasswordBox.Password)
                 MessageBox.Show("Passwords should be the same.", "Warning", MessageBoxButton.OK);
             else
-                write.AddUser(onUsernameBox.Text, onPasswordBox.Password, emailBox.Text);
+            {
+                if (!ThatUserExist())
+                {
+                    write.AddUser(onUsernameBox.Text, onPasswordBox.Password, emailBox.Text);
+                    MessageBox.Show("Account was created successfully.", "Nice work", MessageBoxButton.OK);
+                }
+                else
+                    MessageBox.Show("That eamil or username has already been used.", "Warning");
+
+                onUsernameBox.Clear();
+                onPasswordBox.Clear();
+                onRePasswordBox.Clear();
+                emailBox.Clear();
+            }       
+        }
+        private bool ThatUserExist()
+        {
+            IEnumerable<User> users = read.ReadAll();
+            foreach (User user in users)
+            {
+                if (user.Username == onUsernameBox.Text || user.Email == emailBox.Text)
+                    return true;
+            }
+            return false;
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace UsersPanel
 {
-    [ValueConversion(typeof(bool), typeof(Visibility))]
+    //[ValueConversion(typeof(bool), typeof(Visibility))]
     class BoolVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
