@@ -11,11 +11,6 @@ namespace UsersPanel
     class Write
     {
         IList<User> _users = new List<User>();
-        private string _filename;
-        public Write(string databaseName)
-        {
-            _filename = databaseName;
-        }
         public void AddUser(string username, string password, string email)
         {
             int id = GetNextId();
@@ -24,16 +19,16 @@ namespace UsersPanel
 
             _users.Add(user);
 
-            if (File.Exists(_filename))
-                File.AppendAllText(_filename, ItemToTxt(user));
-            else if (!File.Exists(_filename))
-                File.WriteAllText(_filename, ItemToTxt(user));
+            if (File.Exists(FileName._filename))
+                File.AppendAllText(FileName._filename, ItemToTxt(user));
+            else if (!File.Exists(FileName._filename))
+                File.WriteAllText(FileName._filename, ItemToTxt(user));
             else
                 MessageBox.Show("File does not exist.", "Warning");
         }
         private int GetNextId()
         {
-            Read readFile = new Read(_filename);
+            Read readFile = new Read();
             IEnumerable<User> users = readFile.ReadAll();
 
             if (users.Count() == 0)

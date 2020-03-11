@@ -10,19 +10,14 @@ namespace UsersPanel
 {
     class Read
     {
-        private string _filename;
-        public Read(string filename)
-        {
-            _filename = filename;
-        }
         public IEnumerable<User> ReadAll()
         {
             IList<User> users = new List<User>();
 
-            if(users.Count()==0 && !File.Exists(_filename))
+            if(users.Count() == 0 && !File.Exists(FileName._filename))
                 return users;
 
-            IEnumerable<String> lines = File.ReadAllLines(_filename);
+            IEnumerable<String> lines = File.ReadAllLines(FileName._filename);
 
             foreach(string line in lines)
             {
@@ -44,6 +39,26 @@ namespace UsersPanel
             User user = new User(id, username, password, email);
 
             return user;
+        }
+        public bool ThatUserExist(string username, string email)
+        {
+            IEnumerable<User> users = ReadAll();
+            foreach (User user in users)
+            {
+                if (user.Username == username || user.Email == email)
+                    return true;
+            }
+            return false;
+        }
+        public bool UserLogIn(string username, string password)
+        {
+            IEnumerable<User> users = ReadAll();
+            foreach (User user in users)
+            {
+                if (user.Username == username && user.Password == password)
+                    return true;
+            }
+            return false;
         }
     }
 }

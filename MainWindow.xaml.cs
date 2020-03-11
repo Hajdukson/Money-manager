@@ -20,15 +20,24 @@ namespace UsersPanel
     /// </summary>
     public partial class MainWindow : Window
     {
+        Read read = new Read();
         public MainWindow()
         {
             InitializeComponent();
         }
-
         private void Log_in_button(object sender, RoutedEventArgs e)
         {
             if (inUsernameBox.Text == "" || inPasswordBox.Password == "")
                 MessageBox.Show("Enter all data.", "Warning", MessageBoxButton.OK);
+            else if (read.UserLogIn(inUsernameBox.Text, inPasswordBox.Password))
+            {
+                UserWindow userWindow = new UserWindow(inUsernameBox.Text);
+                userWindow.ShowDialog();
+                inUsernameBox.Clear();
+                inPasswordBox.Clear();
+            }
+            else
+                MessageBox.Show("Check your username and password.", "Warning", MessageBoxButton.OK);
         }
     }
 }
