@@ -31,7 +31,7 @@ namespace UsersPanel
         {
             string[] parameters = line.Split(';');
 
-            int id = int.Parse(parameters[0]);
+            int id = Convert.ToInt32(parameters[0]);
             string username = parameters[1];
             string password = parameters[2];
             string email = parameters[3];

@@ -20,33 +20,33 @@
                 <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}" x:Name="emailHeader" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-        <ToggleButton Content="Add income" Width="100" HorizontalAlignment="Left" x:Name="incomeButton" Checked="incomeButton_Checked"/>
-        <ToggleButton Content="Add outcome" Width="100" HorizontalAlignment="Left" x:Name="outcomeButton" Checked="outcomeButton_Checked"/>
+        <ToggleButton Content="Add income" Width="100" HorizontalAlignment="Left" x:Name="incomeButton"/>
+        <ToggleButton Content="Add outcome" Width="100" HorizontalAlignment="Left" x:Name="outcomeButton"/>
 
         <StackPanel Visibility="{Binding ElementName=incomeButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
             <Label Content="Income"/>
             <WrapPanel>
-                <Label Content="Date(dd-MM-yyyy)" Width="120"/>
-                <TextBox Width="120"/>
+                <Label Content="Date(dd.MM.yyyy)" Width="120"/>
+                <TextBox Width="120" x:Name="incomeDate"/>
             </WrapPanel>
             <WrapPanel>
                 <Label Content="Amount" Width="120"/>
-                <TextBox Width="120"/>
+                <TextBox Width="120"  x:Name="incomeAmount"/>
             </WrapPanel>
-            <Button Content="Add" Width="100" HorizontalAlignment="Left"/>
+            <Button Content="Add" Width="100" HorizontalAlignment="Left" Click="AddIncome"/>
         </StackPanel>
 
         <StackPanel Visibility="{Binding ElementName=outcomeButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
             <Label Content="Outcome"/>
             <WrapPanel>
-                <Label Content="Date(dd-MM-yyyy)" Width="120"/>
-                <TextBox Width="120"/>
+                <Label Content="Date(dd.MM.yyyy)" Width="120"/>
+                <TextBox Width="120" x:Name="outcomeDate"/>
             </WrapPanel>
             <WrapPanel>
                 <Label Content="Amount" Width="120"/>
-                <TextBox Width="120"/>
+                <TextBox Width="120" x:Name="outcomeAmount"/>
             </WrapPanel>
-            <Button Content="Add" Width="100" HorizontalAlignment="Left"/>
+            <Button Content="Add" Width="100" HorizontalAlignment="Left" Click="AddOutcome"/>
         </StackPanel>
 
     </StackPanel>

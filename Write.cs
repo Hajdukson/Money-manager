@@ -21,10 +21,8 @@ namespace UsersPanel
 
             if (File.Exists(FileName._filename))
                 File.AppendAllText(FileName._filename, ItemToTxt(user));
-            else if (!File.Exists(FileName._filename))
-                File.WriteAllText(FileName._filename, ItemToTxt(user));
             else
-                MessageBox.Show("File does not exist.", "Warning");
+                File.WriteAllText(FileName._filename, ItemToTxt(user));
         }
         private int GetNextId()
         {
