@@ -14,6 +14,9 @@ namespace UsersPanel.UserLogic
         {
             IList<User> users = new List<User>();
 
+            if (!File.Exists(FileName._filename))
+                return users;
+
             IEnumerable<String> lines = File.ReadAllLines(FileName._filename);
 
             foreach(string line in lines)

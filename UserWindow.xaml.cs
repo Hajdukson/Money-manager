@@ -48,16 +48,16 @@ namespace UsersPanel
         private void AddIncome(object sender, RoutedEventArgs e)
         {
             ItemType = ItemType.Income;
-            rd.IfUserExists(incomeAmount.Text, incomeDate.Text, DirToUser, ItemType);
+            rd.IfUserExists(incomeAmount.Text, incomeDate.SelectedDate, DirToUser, ItemType);
             incomeAmount.Clear();
-            incomeDate.Clear();
+            //incomeDate.Clear();
         }
         private void AddOutcome(object sender, RoutedEventArgs e)
         {
             ItemType = ItemType.Outcome;
-            rd.IfUserExists(outcomeAmount.Text, outcomeDate.Text, DirToUser, ItemType);
+            rd.IfUserExists(outcomeAmount.Text, outcomeDate.SelectedDate, DirToUser, ItemType);
             outcomeAmount.Clear();
-            outcomeDate.Clear();
+            //outcomeDate.Clear();
         }
     }
 }

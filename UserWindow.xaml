@@ -8,9 +8,105 @@
         Title="UserWindow" Height="450" Width="800">
 
     <Window.Resources>
-        <local:BoolVisibilityConverter x:Key="BoolVisibilityConverter"></local:BoolVisibilityConverter>
+        <Style TargetType="{x:Type DatePickerTextBox}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DatePickerTextBox">
+                        <Grid>
+                            <Grid.Resources>
+                                <SolidColorBrush x:Key="WatermarkBrush" Color="#FFAAAAAA"/>
+                            </Grid.Resources>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="0" />
+                                        <VisualTransition To="MouseOver" GeneratedDuration="0:0:0.1" />
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState Name="Normal" />
+                                    <VisualState Name="MouseOver">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="ContentElement" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="#FF99C1E2" Duration="0"/>
+                                            <ColorAnimation Storyboard.TargetName="watermark_decorator" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="#FF99C1E2" Duration="0"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup Name="WatermarkStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="0" />
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState Name="Unwatermarked" />
+                                    <VisualState Name="Watermarked">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="ContentElement" Storyboard.TargetProperty="Opacity" To="0" Duration="0" />
+                                            <DoubleAnimation Storyboard.TargetName="PART_Watermark" Storyboard.TargetProperty="Opacity" To="1" Duration="0" />
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup Name="FocusStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="0" />
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState Name="Unfocused" />
+                                    <VisualState Name="Focused">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="FocusVisual" Storyboard.TargetProperty="Opacity" To="1" Duration="0" />
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+
+                            <Border x:Name="Border" 
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            CornerRadius="1" 
+                            Opacity="1">
+                                <Grid x:Name="WatermarkContent"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                    <Border x:Name="ContentElement" BorderThickness="1">
+                                        <Border.BorderBrush>
+                                            <SolidColorBrush Color="#FFFFFFFF"/>
+                                        </Border.BorderBrush>
+                                    </Border>
+                                    <Border x:Name="watermark_decorator" BorderThickness="1">
+                                        <Border.BorderBrush>
+                                            <SolidColorBrush Color="#FFFFFFFF"/>
+                                        </Border.BorderBrush>
+                                        <ContentControl x:Name="PART_Watermark"
+                                                    Opacity="0"
+                                                    Focusable="False"
+                                                    IsHitTestVisible="False"
+                                                    Padding="2">
+                                            <ContentControl.Template>
+                                                <ControlTemplate>
+                                                    <TextBlock Text="//____"/>
+                                                </ControlTemplate>
+                                            </ContentControl.Template>
+                                        </ContentControl>
+                                    </Border>
+                                    <ScrollViewer x:Name="PART_ContentHost" 
+                                          Margin="0"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                    <Border x:Name="FocusVisual" BorderBrush="#FF45D6FA" CornerRadius="1" Opacity="0" IsHitTestVisible="False"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <local:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
+
     </Window.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -27,37 +123,38 @@
                     <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}" x:Name="emailHeader" IsReadOnly="True"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <ToggleButton Content="Add income" Width="100" HorizontalAlignment="Left" x:Name="incomeButton"/>
-            <ToggleButton Content="Add outcome" Width="100" HorizontalAlignment="Left" x:Name="outcomeButton"/>
+            <ToggleButton Content="Income" Width="100" HorizontalAlignment="Left" x:Name="incomeButton"/>
+            <ToggleButton Content="Outcome" Width="100" HorizontalAlignment="Left" x:Name="outcomeButton"/>
 
             <StackPanel Visibility="{Binding ElementName=incomeButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
                 <Label Content="Income"/>
                 <WrapPanel>
-                    <Label Content="Date(dd.MM.yyyy)" Width="120"/>
-                    <TextBox Width="120" x:Name="incomeDate"/>
-                </WrapPanel>
-                <WrapPanel>
                     <Label Content="Amount" Width="120"/>
                     <TextBox Width="120"  x:Name="incomeAmount"/>
                 </WrapPanel>
-                <Button Content="Add" Width="100" HorizontalAlignment="Left" Click="AddIncome"/>
+                <WrapPanel>
+                    <Label Content="Date(dd.MM.yyyy)" Width="120"/>
+                    <DatePicker Grid.Column="1" Language="English" x:Name="incomeDate" />
+                </WrapPanel>
+                <Button Content="Add" Width="100" HorizontalAlignment="Left"/>
             </StackPanel>
 
             <StackPanel Visibility="{Binding ElementName=outcomeButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
                 <Label Content="Outcome"/>
                 <WrapPanel>
-                    <Label Content="Date(dd.MM.yyyy)" Width="120"/>
-                    <TextBox Width="120" x:Name="outcomeDate"/>
-                </WrapPanel>
-                <WrapPanel>
                     <Label Content="Amount" Width="120"/>
                     <TextBox Width="120" x:Name="outcomeAmount"/>
                 </WrapPanel>
-                <Button Content="Add" Width="100" HorizontalAlignment="Left" Click="AddOutcome"/>
+                <WrapPanel>
+                    <Label Content="Date(dd.MM.yyyy)" Width="120"/>
+                    <DatePicker Grid.Column="1" Language="English" x:Name="outcomeDate"/>
+                </WrapPanel>
+                <Button Content="Add" Width="100" HorizontalAlignment="Left" Click="AddOutcome" />
             </StackPanel>
         </StackPanel>
-        <DatePicker Grid.Column="1" Language="English">
-        </DatePicker>
-
+        <WrapPanel Grid.Column="1">
+            <ToggleButton Content="Month report" Height="26" Width="150"/>
+            <ToggleButton Content="Lifetime report" Height="26"  Width="150"/>
+        </WrapPanel>
     </Grid>
 </Window>
