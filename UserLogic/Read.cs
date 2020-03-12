@@ -6,16 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace UsersPanel
+namespace UsersPanel.UserLogic
 {
     class Read
     {
         public IEnumerable<User> ReadAll()
         {
             IList<User> users = new List<User>();
-
-            if(users.Count() == 0 && !File.Exists(FileName._filename))
-                return users;
 
             IEnumerable<String> lines = File.ReadAllLines(FileName._filename);
 

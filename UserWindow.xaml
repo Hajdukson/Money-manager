@@ -10,44 +10,54 @@
     <Window.Resources>
         <local:BoolVisibilityConverter x:Key="BoolVisibilityConverter"></local:BoolVisibilityConverter>
     </Window.Resources>
-    <StackPanel>
-        <DataGrid x:Name="myDataGrid"
-                  AutoGenerateColumns="False"
-                  >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Path=Id}" x:Name="idHeader" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Username" Binding="{Binding Path=Username}" x:Name="usernameHeader" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}" x:Name="emailHeader" IsReadOnly="True"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <ToggleButton Content="Add income" Width="100" HorizontalAlignment="Left" x:Name="incomeButton"/>
-        <ToggleButton Content="Add outcome" Width="100" HorizontalAlignment="Left" x:Name="outcomeButton"/>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
-        <StackPanel Visibility="{Binding ElementName=incomeButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
-            <Label Content="Income"/>
-            <WrapPanel>
-                <Label Content="Date(dd.MM.yyyy)" Width="120"/>
-                <TextBox Width="120" x:Name="incomeDate"/>
-            </WrapPanel>
-            <WrapPanel>
-                <Label Content="Amount" Width="120"/>
-                <TextBox Width="120"  x:Name="incomeAmount"/>
-            </WrapPanel>
-            <Button Content="Add" Width="100" HorizontalAlignment="Left" Click="AddIncome"/>
+        <StackPanel Grid.Column="0">
+            <DataGrid x:Name="myDataGrid"
+                      AutoGenerateColumns="False"
+                      >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Path=Id}" x:Name="idHeader" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Username" Binding="{Binding Path=Username}" x:Name="usernameHeader" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}" x:Name="emailHeader" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <ToggleButton Content="Add income" Width="100" HorizontalAlignment="Left" x:Name="incomeButton"/>
+            <ToggleButton Content="Add outcome" Width="100" HorizontalAlignment="Left" x:Name="outcomeButton"/>
+
+            <StackPanel Visibility="{Binding ElementName=incomeButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
+                <Label Content="Income"/>
+                <WrapPanel>
+                    <Label Content="Date(dd.MM.yyyy)" Width="120"/>
+                    <TextBox Width="120" x:Name="incomeDate"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <Label Content="Amount" Width="120"/>
+                    <TextBox Width="120"  x:Name="incomeAmount"/>
+                </WrapPanel>
+                <Button Content="Add" Width="100" HorizontalAlignment="Left" Click="AddIncome"/>
+            </StackPanel>
+
+            <StackPanel Visibility="{Binding ElementName=outcomeButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
+                <Label Content="Outcome"/>
+                <WrapPanel>
+                    <Label Content="Date(dd.MM.yyyy)" Width="120"/>
+                    <TextBox Width="120" x:Name="outcomeDate"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <Label Content="Amount" Width="120"/>
+                    <TextBox Width="120" x:Name="outcomeAmount"/>
+                </WrapPanel>
+                <Button Content="Add" Width="100" HorizontalAlignment="Left" Click="AddOutcome"/>
+            </StackPanel>
         </StackPanel>
+        <DatePicker Grid.Column="1" Language="English">
+        </DatePicker>
 
-        <StackPanel Visibility="{Binding ElementName=outcomeButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
-            <Label Content="Outcome"/>
-            <WrapPanel>
-                <Label Content="Date(dd.MM.yyyy)" Width="120"/>
-                <TextBox Width="120" x:Name="outcomeDate"/>
-            </WrapPanel>
-            <WrapPanel>
-                <Label Content="Amount" Width="120"/>
-                <TextBox Width="120" x:Name="outcomeAmount"/>
-            </WrapPanel>
-            <Button Content="Add" Width="100" HorizontalAlignment="Left" Click="AddOutcome"/>
-        </StackPanel>
-
-    </StackPanel>
+    </Grid>
 </Window>

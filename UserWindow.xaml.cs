@@ -13,6 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using UsersPanel.ItemLogic;
+using UsersPanel.UserLogic;
 
 namespace UsersPanel
 {
@@ -21,60 +23,41 @@ namespace UsersPanel
     /// </summary>
     public partial class UserWindow : Window
     {
-        ObservableCollection<User> currentUser = new ObservableCollection<User>();
+        Rd rd = new Rd();
         Read read = new Read();
+        ObservableCollection<User> currentUser = new ObservableCollection<User>();
         private ItemType ItemType;
-        private string Username;
-
+        private string DirToUser;
         public UserWindow(string username)
         {
             InitializeComponent();
             IEnumerable<User> users = read.ReadAll();
-
+            
             foreach (User user in users)
             {
                 if (user.Username == username)
                 {
-                    Username = user.Username + ".txt";
+                    username = user.Username + ".txt";
                     currentUser.Add(new User(user.Id, user.Username, user.Password, user.Email));
                 }
             }
-
+            DirToUser = Directory.GetCurrentDirectory() + @"\Users\" + username;
+            rd.ReadItems(DirToUser);
             myDataGrid.ItemsSource = currentUser;
         }
         private void AddIncome(object sender, RoutedEventArgs e)
         {
             ItemType = ItemType.Income;
-            
-            if (!File.Exists(Username))
-                File.WriteAllText(Username, ItemToTxt(new Item(Convert.ToDecimal(incomeAmount.Text), Convert.ToDateTime(incomeDate.Text))));
-            else
-                File.AppendAllText(Username, ItemToTxt(new Item(Convert.ToDecimal(incomeAmount.Text), Convert.ToDateTime(incomeDate.Text))));
+            rd.IfUserExists(incomeAmount.Text, incomeDate.Text, DirToUser, ItemType);
+            incomeAmount.Clear();
+            incomeDate.Clear();
         }
-
         private void AddOutcome(object sender, RoutedEventArgs e)
         {
             ItemType = ItemType.Outcome;
-
-            if (!File.Exists(Username))
-                File.WriteAllText(Username, ItemToTxt(new Item(Convert.ToDecimal(outcomeAmount.Text), Convert.ToDateTime(outcomeDate.Text))));
-            else
-                File.AppendAllText(Username, ItemToTxt(new Item(Convert.ToDecimal(incomeAmount.Text), Convert.ToDateTime(outcomeDate.Text))));
-        }
-        private string ItemToTxt(Item item)
-        {
-            string type = "I";
-            
-            if (ItemType == ItemType.Outcome)
-                type = "O";
-
-            string line = string.Format("{0};{1};{2}",
-                type,
-                item.Date.ToString("dd-MM-yyyy"),
-                item.Amount
-                );
-
-            return line + Environment.NewLine;
+            rd.IfUserExists(outcomeAmount.Text, outcomeDate.Text, DirToUser, ItemType);
+            outcomeAmount.Clear();
+            outcomeDate.Clear();
         }
     }
 }

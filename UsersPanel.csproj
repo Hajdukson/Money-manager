@@ -58,18 +58,20 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BoolVisibilityConverter.cs" />
-    <Compile Include="FileName.cs" />
-    <Compile Include="Item.cs" />
-    <Compile Include="ItemType.cs" />
-    <Compile Include="Read.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="ItemLogic\Rd.cs" />
+    <Compile Include="UserLogic\FileName.cs" />
+    <Compile Include="ItemLogic\Item.cs" />
+    <Compile Include="ItemLogic\ItemType.cs" />
+    <Compile Include="UserLogic\Read.cs" />
+    <Compile Include="ItemLogic\Services.cs" />
+    <Compile Include="UserLogic\User.cs" />
     <Compile Include="UserControl1.xaml.cs">
       <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Write.cs" />
+    <Compile Include="UserLogic\Write.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

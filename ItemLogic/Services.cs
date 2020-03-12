@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UsersPanel
+namespace UsersPanel.ItemLogic
 {
-    public static class FileName
+    class Services
     {
-        public static string _filename = "database.txt";
+
     }
 }

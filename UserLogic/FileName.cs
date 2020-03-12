@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UsersPanel
+namespace UsersPanel.UserLogic
 {
-    public enum ItemType 
+    public static class FileName
     {
-        Income,
-        Outcome
+        public static string _filename = "database.txt";
     }
 }

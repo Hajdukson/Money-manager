@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
         <local:BoolVisibilityConverter x:Key="BoolVisibilityConverter"></local:BoolVisibilityConverter>
-        
+
         <ControlTemplate TargetType="ToggleButton" x:Key="myButton">
             <ControlTemplate.Triggers>
                 <MultiDataTrigger>
@@ -23,7 +23,7 @@
                 <ContentPresenter/>
             </TextBlock>
         </ControlTemplate>
-        
+
         <ControlTemplate TargetType="Button" x:Key="myButton2">
             <ControlTemplate.Triggers>
                 <MultiDataTrigger>
@@ -47,7 +47,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="1" HorizontalAlignment="Center">
             <WrapPanel>
-                <Label Width="70">Username: </Label>
+                <Label Width="70">Username:</Label>
                 <TextBox Width="150" x:Name="inUsernameBox"/>
             </WrapPanel>
             <WrapPanel>
