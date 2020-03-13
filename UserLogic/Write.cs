@@ -22,7 +22,10 @@ namespace UsersPanel.UserLogic
             if (File.Exists(FileName._filename))
                 File.AppendAllText(FileName._filename, ItemToTxt(user));
             else
+            { 
                 File.WriteAllText(FileName._filename, ItemToTxt(user));
+                Directory.CreateDirectory(Directory.GetCurrentDirectory()+@"\Users");
+            }
         }
         private int GetNextId()
         {
