@@ -59,7 +59,6 @@
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
 
-
                             <Border x:Name="Border" 
                             Background="{TemplateBinding Background}" 
                             BorderBrush="{TemplateBinding BorderBrush}" 
@@ -123,17 +122,23 @@
                     <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}" x:Name="emailHeader" IsReadOnly="True"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <ToggleButton Content="Income" Width="100" HorizontalAlignment="Left" x:Name="incomeButton"/>
-            <ToggleButton Content="Outcome" Width="100" HorizontalAlignment="Left" x:Name="outcomeButton"/>
+            <WrapPanel>
+                <ToggleButton Content="Income" Width="100" HorizontalAlignment="Left" x:Name="incomeButton"/>
+                <ToggleButton Content="Outcome" Width="100" HorizontalAlignment="Left" x:Name="outcomeButton"/>
+            </WrapPanel>
+            <WrapPanel>
+                <ToggleButton Content="Month report" Width="100" x:Name="monthReportButton" Checked="ShowMothReport"/>
+                <ToggleButton Content="Lifetime report"  Width="100" x:Name="lifetimeReportButton" Checked="ShowLifetimeReport"/>
+            </WrapPanel>
 
             <StackPanel Visibility="{Binding ElementName=incomeButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
                 <Label Content="Income"/>
                 <WrapPanel>
-                    <Label Content="Amount" Width="120"/>
+                    <Label Content="Amount" Width="70"/>
                     <TextBox Width="120"  x:Name="incomeAmount"/>
                 </WrapPanel>
                 <WrapPanel>
-                    <Label Content="Date(dd.MM.yyyy)" Width="120"/>
+                    <Label Content="Date" Width="70"/>
                     <DatePicker Grid.Column="1" Language="English" x:Name="incomeDate" />
                 </WrapPanel>
                 <Button Content="Add" Width="100" HorizontalAlignment="Left"  Click="AddIncome"/>
@@ -142,19 +147,20 @@
             <StackPanel Visibility="{Binding ElementName=outcomeButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
                 <Label Content="Outcome"/>
                 <WrapPanel>
-                    <Label Content="Amount" Width="120"/>
+                    <Label Content="Amount" Width="70"/>
                     <TextBox Width="120" x:Name="outcomeAmount"/>
                 </WrapPanel>
                 <WrapPanel>
-                    <Label Content="Date(dd.MM.yyyy)" Width="120"/>
+                    <Label Content="Date" Width="70"/>
                     <DatePicker Grid.Column="1" Language="English" x:Name="outcomeDate"/>
                 </WrapPanel>
                 <Button Content="Add" Width="100" HorizontalAlignment="Left" Click="AddOutcome" />
             </StackPanel>
         </StackPanel>
-        <WrapPanel Grid.Column="1">
-            <ToggleButton Content="Month report" Height="26" Width="150"/>
-            <ToggleButton Content="Lifetime report" Height="26"  Width="150"/>
-        </WrapPanel>
+        
+        <StackPanel Grid.Column="1">
+            <DataGrid x:Name="lifetimeReportTable"/>
+
+        </StackPanel>
     </Grid>
 </Window>

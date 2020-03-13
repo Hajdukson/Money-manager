@@ -26,6 +26,7 @@ namespace UsersPanel
         Rd rd = new Rd();
         Read read = new Read();
         ObservableCollection<User> currentUser = new ObservableCollection<User>();
+        ObservableCollection<Item> userItems = new ObservableCollection<Item>();
         private ItemType ItemType;
         private string DirToUser;
         public UserWindow(string username)
@@ -44,6 +45,7 @@ namespace UsersPanel
             DirToUser = Directory.GetCurrentDirectory() + @"\Users\" + username;
             rd.ReadItems(DirToUser);
             myDataGrid.ItemsSource = currentUser;
+            lifetimeReportTable.ItemsSource = userItems;
         }
         private void AddIncome(object sender, RoutedEventArgs e)
         {
@@ -58,6 +60,16 @@ namespace UsersPanel
             rd.IfUserExists(outcomeAmount.Text, outcomeDate.SelectedDate, DirToUser, ItemType);
             outcomeAmount.Clear();
             //outcomeDate.Clear();
+        }
+
+        private void ShowMothReport(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ShowLifetimeReport(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
