@@ -51,7 +51,10 @@ namespace UsersPanel.ItemLogic
         public void IfUserExists(string amount, DateTime? date, string dirToUser, ItemType itemType)
         {
             if (!File.Exists(dirToUser))
+            {
+                Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Users");
                 File.WriteAllText(dirToUser, ItemToTxt(new Item(Convert.ToDecimal(amount), Convert.ToDateTime(date)), itemType));
+            }
             else if (File.Exists(dirToUser) && (amount == "" || date == null))
                 MessageBox.Show("Enter data.", "Warning", MessageBoxButton.OK);
             else

@@ -136,7 +136,7 @@
                     <Label Content="Date(dd.MM.yyyy)" Width="120"/>
                     <DatePicker Grid.Column="1" Language="English" x:Name="incomeDate" />
                 </WrapPanel>
-                <Button Content="Add" Width="100" HorizontalAlignment="Left"/>
+                <Button Content="Add" Width="100" HorizontalAlignment="Left"  Click="AddIncome"/>
             </StackPanel>
 
             <StackPanel Visibility="{Binding ElementName=outcomeButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
