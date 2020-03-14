@@ -1,27 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace UsersPanel.ItemLogic
 {
     class Services
     {
-        Rd rd = new Rd();
-        private string _dirToUser;
-        public Services(string dirToUser)
+        public Services()
         {
-            _dirToUser = dirToUser;
-        }
 
-        public void ShowLifeTimeReport()
-        {
-            IEnumerable<Item> items = rd.ReadItems(_dirToUser);
-            
-            
         }
-
     }
 }

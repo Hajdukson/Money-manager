@@ -28,10 +28,15 @@ namespace UsersPanel.ItemLogic
         {
             string[] item = line.Split(';');
 
+            ItemType itemType = ItemType.Income;
+
+            if (item[0] == "O")
+                itemType = ItemType.Outcome;
+            
             DateTime date = Convert.ToDateTime(item[1]);
             decimal amout = Convert.ToDecimal(item[2]);
 
-            return new Item(amout, date);
+            return new Item(amout, date, itemType);
         }
         private string ItemToTxt(Item item, ItemType itemType)
         {
@@ -53,12 +58,12 @@ namespace UsersPanel.ItemLogic
             if (!File.Exists(dirToUser))
             {
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Users");
-                File.WriteAllText(dirToUser, ItemToTxt(new Item(Convert.ToDecimal(amount), Convert.ToDateTime(date)), itemType));
+                File.WriteAllText(dirToUser, ItemToTxt(new Item(Convert.ToDecimal(amount), Convert.ToDateTime(date), itemType), itemType));
             }
             else if (File.Exists(dirToUser) && (amount == "" || date == null))
                 MessageBox.Show("Enter data.", "Warning", MessageBoxButton.OK);
             else
-                File.AppendAllText(dirToUser, ItemToTxt(new Item(Convert.ToDecimal(amount), Convert.ToDateTime(date)), itemType));
+                File.AppendAllText(dirToUser, ItemToTxt(new Item(Convert.ToDecimal(amount), Convert.ToDateTime(date), itemType), itemType));
         }
     }
 }

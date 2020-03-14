@@ -114,21 +114,15 @@
 
         <StackPanel Grid.Column="0">
             <DataGrid x:Name="myDataGrid"
-                      AutoGenerateColumns="False"
-                      >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Path=Id}" x:Name="idHeader" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Username" Binding="{Binding Path=Username}" x:Name="usernameHeader" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}" x:Name="emailHeader" IsReadOnly="True"/>
-                </DataGrid.Columns>
+                      IsReadOnly="True">
             </DataGrid>
             <WrapPanel>
                 <ToggleButton Content="Income" Width="100" HorizontalAlignment="Left" x:Name="incomeButton"/>
                 <ToggleButton Content="Outcome" Width="100" HorizontalAlignment="Left" x:Name="outcomeButton"/>
             </WrapPanel>
             <WrapPanel>
-                <ToggleButton Content="Month report" Width="100" x:Name="monthReportButton" Checked="ShowMothReport"/>
-                <ToggleButton Content="Lifetime report"  Width="100" x:Name="lifetimeReportButton" Checked="ShowLifetimeReport"/>
+                <ToggleButton Content="Month report" Width="100" x:Name="monthReportButton" Checked="ShowMothReport" Unchecked="HideMonthReport"/>
+                <ToggleButton Content="Lifetime report"  Width="100" x:Name="lifetimeReportButton" Checked="ShowLifetimeReport" Unchecked="HideLifetimeReport"/>
             </WrapPanel>
 
             <StackPanel Visibility="{Binding ElementName=incomeButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
@@ -157,10 +151,17 @@
                 <Button Content="Add" Width="100" HorizontalAlignment="Left" Click="AddOutcome" />
             </StackPanel>
         </StackPanel>
-        
-        <StackPanel Grid.Column="1">
-            <DataGrid x:Name="lifetimeReportTable"/>
 
+        <StackPanel Grid.Column="1">
+            <DataGrid x:Name="lifetimeReportTable"
+                      IsReadOnly="True"
+                      Visibility="{Binding ElementName=lifetimeReportButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
+            </DataGrid>
+            <DataGrid x:Name="monthReportTable"
+                      IsReadOnly="True"
+                      Visibility="{Binding ElementName=monthReportButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
+            </DataGrid>
         </StackPanel>
+        
     </Grid>
 </Window>
