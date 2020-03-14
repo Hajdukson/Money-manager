@@ -124,6 +124,7 @@
                 <ToggleButton Content="Month report" Width="100" x:Name="monthReportButton" Checked="ShowMothReport" Unchecked="HideMonthReport"/>
                 <ToggleButton Content="Lifetime report"  Width="100" x:Name="lifetimeReportButton" Checked="ShowLifetimeReport" Unchecked="HideLifetimeReport"/>
             </WrapPanel>
+            
 
             <StackPanel Visibility="{Binding ElementName=incomeButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
                 <Label Content="Income"/>
@@ -153,14 +154,23 @@
         </StackPanel>
 
         <StackPanel Grid.Column="1">
-            <DataGrid x:Name="lifetimeReportTable"
-                      IsReadOnly="True"
-                      Visibility="{Binding ElementName=lifetimeReportButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
-            </DataGrid>
-            <DataGrid x:Name="monthReportTable"
-                      IsReadOnly="True"
-                      Visibility="{Binding ElementName=monthReportButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
-            </DataGrid>
+            
+            <StackPanel Visibility="{Binding ElementName=lifetimeReportButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
+                <TextBlock>Lifetime report</TextBlock>
+                <DataGrid x:Name="lifetimeReportTable"
+                          IsReadOnly="True">
+                </DataGrid>
+                <TextBlock x:Name="balanceLifetime"></TextBlock>
+            </StackPanel>
+
+            <StackPanel Visibility="{Binding ElementName=monthReportButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
+                <TextBlock>Month report</TextBlock>
+                <DataGrid x:Name="monthReportTable"
+                          IsReadOnly="True">
+                </DataGrid>
+                <TextBlock x:Name="balanceMonth"></TextBlock>
+            </StackPanel>
+            
         </StackPanel>
         
     </Grid>

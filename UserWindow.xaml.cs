@@ -28,15 +28,14 @@ namespace UsersPanel
         ObservableCollection<User> _currentUser = new ObservableCollection<User>();
         ObservableCollection<Item> _userItemsMonth = new ObservableCollection<Item>();
         ObservableCollection<Item> _userItemWhole= new ObservableCollection<Item>();
+        Services _services;
+        IEnumerable<Item> _items;
         private ItemType _ItemType;
         private string _DirToUser;
-        public UserWindow()
-        { }
         public UserWindow(string username)
         {
             InitializeComponent();
             IEnumerable<User> users = _read.ReadAll();
-            
 
             foreach (User user in users)
             {
@@ -48,6 +47,8 @@ namespace UsersPanel
             }
             _DirToUser = Directory.GetCurrentDirectory() + @"\Users\" + username;
             
+            _services = new Services();
+            _items = _rd.ReadItems(_DirToUser);
             myDataGrid.ItemsSource = _currentUser;
         }
         private void AddIncome(object sender, RoutedEventArgs e)
@@ -67,7 +68,8 @@ namespace UsersPanel
 
         private void ShowMothReport(object sender, RoutedEventArgs e)
         {
-            _userItemsMonth = ShowMothReport();
+            _userItemsMonth = _services.ShowMothReport(_items);
+            balanceMonth.Text = "Balance = " + _services.DispalyBalanceMonth(_items) + Environment.NewLine;
             monthReportTable.ItemsSource = _userItemsMonth;   
         }
         private void HideMonthReport(object sender, RoutedEventArgs e)
@@ -78,7 +80,8 @@ namespace UsersPanel
 
         private void ShowLifetimeReport(object sender, RoutedEventArgs e)
         {
-            _userItemWhole = ShowLifetiemReport();
+            _userItemWhole = _services.ShowLifetiemReport(_items);
+            balanceLifetime.Text = "Balance = " +  _services.DispalyBalanceLifetime(_items) + Environment.NewLine;
             lifetimeReportTable.ItemsSource = _userItemWhole;
             
         }
@@ -86,28 +89,6 @@ namespace UsersPanel
         {
             _userItemWhole = null;
             lifetimeReportTable.ItemsSource = null;
-        }
-
-        private ObservableCollection<Item> ShowLifetiemReport()
-        {
-            ObservableCollection<Item> items = new ObservableCollection<Item>();
-            IEnumerable<Item> lines = _rd.ReadItems(_DirToUser);
-
-            foreach (Item item in lines)
-                items.Add(item);
-
-            return items;
-        }
-        private ObservableCollection<Item> ShowMothReport()
-        {
-            ObservableCollection<Item> items = new ObservableCollection<Item>();
-            IEnumerable<Item> lines = _rd.ReadItems(_DirToUser);
-
-            foreach (Item item in lines)
-                if (item.Date.Year == DateTime.Now.Year && item.Date.Month == DateTime.Now.Month)
-                    items.Add(item);
-
-            return items;
         }
     }
 }
