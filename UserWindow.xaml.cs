@@ -46,13 +46,12 @@ namespace UsersPanel
                 }
             }
             _DirToUser = Directory.GetCurrentDirectory() + @"\Users\" + username;
-            
             _services = new Services();
-            _items = _rd.ReadItems(_DirToUser);
             myDataGrid.ItemsSource = _currentUser;
         }
         private void AddIncome(object sender, RoutedEventArgs e)
         {
+            
             _ItemType = ItemType.Income;
             _rd.IfUserExists(incomeAmount.Text, incomeDate.SelectedDate, _DirToUser, _ItemType);
             incomeAmount.Clear();
@@ -68,6 +67,7 @@ namespace UsersPanel
 
         private void ShowMothReport(object sender, RoutedEventArgs e)
         {
+            _items = _rd.ReadItems(_DirToUser);
             _userItemsMonth = _services.ShowMothReport(_items);
             balanceMonth.Text = "Balance = " + _services.DispalyBalanceMonth(_items) + Environment.NewLine;
             monthReportTable.ItemsSource = _userItemsMonth;   
@@ -80,6 +80,7 @@ namespace UsersPanel
 
         private void ShowLifetimeReport(object sender, RoutedEventArgs e)
         {
+            _items = _rd.ReadItems(_DirToUser);
             _userItemWhole = _services.ShowLifetiemReport(_items);
             balanceLifetime.Text = "Balance = " +  _services.DispalyBalanceLifetime(_items) + Environment.NewLine;
             lifetimeReportTable.ItemsSource = _userItemWhole;

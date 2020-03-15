@@ -5,7 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UsersPanel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="550" Width="950"
+        ResizeMode="CanMinimize">
+    <Window.Background>
+        <ImageBrush ImageSource="Images/background.png"/>
+    </Window.Background>
+
     <Window.Resources>
         <local:BoolVisibilityConverter x:Key="BoolVisibilityConverter"></local:BoolVisibilityConverter>
 
@@ -19,7 +24,7 @@
                     <Setter Property="Cursor" Value="Hand"/>
                 </MultiDataTrigger>
             </ControlTemplate.Triggers>
-            <TextBlock HorizontalAlignment="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=HorizontalAlignment}">
+            <TextBlock>
                 <ContentPresenter/>
             </TextBlock>
         </ControlTemplate>
@@ -34,29 +39,30 @@
                     <Setter Property="Cursor" Value="Hand"/>
                 </MultiDataTrigger>
             </ControlTemplate.Triggers>
-            <TextBlock HorizontalAlignment="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=HorizontalAlignment}">
+            <TextBlock>
                 <ContentPresenter/>
             </TextBlock>
         </ControlTemplate>
     </Window.Resources>
+
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-            <WrapPanel>
-                <Label Width="70">Username:</Label>
-                <TextBox Width="150" x:Name="inUsernameBox"/>
-            </WrapPanel>
-            <WrapPanel>
-                <Label Width="70" >Password:</Label>
-                <PasswordBox Width="150" x:Name="inPasswordBox"/>
-            </WrapPanel>
-            <Button Content="Log in" Template="{StaticResource myButton2}" HorizontalAlignment="Center" Click="Log_in_button"></Button>
-            <ToggleButton Content="Create a new account" Template="{StaticResource myButton}" x:Name="toggleButtonToShowMenuCreatUser" HorizontalAlignment="Center"/>
-            <local:UserControl1 Visibility="{Binding ElementName=toggleButtonToShowMenuCreatUser, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}"></local:UserControl1>
+
+        <StackPanel Margin="5">
+        <Border HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="3" Margin="10" Padding="5">
+            <StackPanel >
+                <WrapPanel>
+                    <Label Width="70" Content="Username:"/>
+                    <TextBox Width="150" x:Name="inUsernameBox"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <Label Width="70" Content="Password:" />
+                    <PasswordBox Width="150" x:Name="inPasswordBox"/>
+                </WrapPanel>
+                <Button Content="Log in" Template="{StaticResource myButton2}" HorizontalAlignment="Center" Click="Log_in_button"/>
+                <ToggleButton Content="Create a new account" Template="{StaticResource myButton}" x:Name="toggleButtonToShowMenuCreatUser" HorizontalAlignment="Center"/>
+                <local:UserControl1 Visibility="{Binding IsChecked, Converter={StaticResource BoolVisibilityConverter}, ElementName=toggleButtonToShowMenuCreatUser}"/>
+            </StackPanel>
+        </Border>
         </StackPanel>
     </Grid>
 </Window>

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UsersPanel"
         mc:Ignorable="d"
-        Title="UserWindow" Height="450" Width="800">
+        Title="UserWindow" Height="550" Width="900"
+        ResizeMode="CanMinimize">
 
     <Window.Resources>
         <Style TargetType="{x:Type DatePickerTextBox}">
@@ -104,6 +105,38 @@
         </Style>
         <local:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
 
+        <ControlTemplate TargetType="{x:Type Button}" x:Key="templateForButton">
+            <Grid>
+                <Ellipse Width="70" Height="30" Fill="{TemplateBinding Background}"></Ellipse>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ContentPresenter/>
+                </TextBlock>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsMouseOver" Value="True"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background" Value="Gold"/>
+                </MultiTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate TargetType="{x:Type Button}" x:Key="templateForButton2">
+            <Grid>
+                <Ellipse Width="70" Height="30" Fill="{TemplateBinding Background}"></Ellipse>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ContentPresenter/>
+                </TextBlock>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsMouseOver" Value="True"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background" Value="Red"/>
+                </MultiTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </Window.Resources>
 
     <Grid>
@@ -111,11 +144,38 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-
+        
+        <Image Source="Images/usermoney.jpg" Margin="238,186,10,60"/>
         <StackPanel Grid.Column="0">
-            <DataGrid x:Name="myDataGrid"
-                      IsReadOnly="True">
-            </DataGrid>
+            <ListView x:Name="myDataGrid" IsHitTestVisible="False">
+                <ListView.View>
+                    <GridView>
+                        <GridView.ColumnHeaderContainerStyle>
+                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                <Setter Property="Margin" Value="3"/>
+                                <Setter Property="Height" Value="30"/>
+                                <Setter Property="FontSize" Value="20"/>
+                            </Style>
+                        </GridView.ColumnHeaderContainerStyle>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Width="50">
+                            <GridViewColumnHeader Content="Id"/>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Username}" Width="100">
+                            <GridViewColumnHeader Content="Username"/>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Email}" Width="282">
+                            <GridViewColumnHeader Content="Email"/>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontSize" Value="15"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
             <WrapPanel>
                 <ToggleButton Content="Income" Width="100" HorizontalAlignment="Left" x:Name="incomeButton"/>
                 <ToggleButton Content="Outcome" Width="100" HorizontalAlignment="Left" x:Name="outcomeButton"/>
@@ -124,54 +184,65 @@
                 <ToggleButton Content="Month report" Width="100" x:Name="monthReportButton" Checked="ShowMothReport" Unchecked="HideMonthReport"/>
                 <ToggleButton Content="Lifetime report"  Width="100" x:Name="lifetimeReportButton" Checked="ShowLifetimeReport" Unchecked="HideLifetimeReport"/>
             </WrapPanel>
-            
 
-            <StackPanel Visibility="{Binding ElementName=incomeButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
+            <StackPanel Visibility="{Binding ElementName=incomeButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}" >
                 <Label Content="Income"/>
-                <WrapPanel>
-                    <Label Content="Amount" Width="70"/>
+                <WrapPanel Margin="3">
+                    <Label Content="Amount" Width="55"/>
                     <TextBox Width="120"  x:Name="incomeAmount"/>
                 </WrapPanel>
-                <WrapPanel>
-                    <Label Content="Date" Width="70"/>
+                <WrapPanel Margin="3">
+                    <Label Content="Date" Width="55"/>
                     <DatePicker Grid.Column="1" Language="English" x:Name="incomeDate" />
                 </WrapPanel>
-                <Button Content="Add" Width="100" HorizontalAlignment="Left"  Click="AddIncome"/>
+                <Button Content="Add" Width="100" HorizontalAlignment="Left"  Click="AddIncome" Template="{StaticResource templateForButton}"/>
             </StackPanel>
 
-            <StackPanel Visibility="{Binding ElementName=outcomeButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
+            <StackPanel Visibility="{Binding ElementName=outcomeButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}" >
                 <Label Content="Outcome"/>
-                <WrapPanel>
-                    <Label Content="Amount" Width="70"/>
-                    <TextBox Width="120" x:Name="outcomeAmount"/>
+                <WrapPanel Margin="3">
+                    <Label Content="Amount" Width="55"/>
+                    <TextBox Width="120" x:Name="outcomeAmount" />
                 </WrapPanel>
-                <WrapPanel>
-                    <Label Content="Date" Width="70"/>
+                <WrapPanel Margin="3">
+                    <Label Content="Date"  Width="55"/>
                     <DatePicker Grid.Column="1" Language="English" x:Name="outcomeDate"/>
                 </WrapPanel>
-                <Button Content="Add" Width="100" HorizontalAlignment="Left" Click="AddOutcome" />
+                <Button Content="Add" Width="100" HorizontalAlignment="Left"  Click="AddOutcome" Template="{StaticResource templateForButton}"/>
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Column="1">
-            
-            <StackPanel Visibility="{Binding ElementName=lifetimeReportButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
-                <TextBlock>Lifetime report</TextBlock>
-                <DataGrid x:Name="lifetimeReportTable"
-                          IsReadOnly="True">
-                </DataGrid>
-                <TextBlock x:Name="balanceLifetime"></TextBlock>
-            </StackPanel>
 
-            <StackPanel Visibility="{Binding ElementName=monthReportButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
-                <TextBlock>Month report</TextBlock>
-                <DataGrid x:Name="monthReportTable"
-                          IsReadOnly="True">
-                </DataGrid>
-                <TextBlock x:Name="balanceMonth"></TextBlock>
-            </StackPanel>
-            
-        </StackPanel>
         
+        <ScrollViewer  Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <StackPanel Visibility="{Binding ElementName=lifetimeReportButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
+                    <Border BorderBrush="Black" BorderThickness="2">
+                        <StackPanel>
+                            <TextBlock>Lifetime report</TextBlock>
+                            <DataGrid x:Name="lifetimeReportTable"
+                                              IsReadOnly="True"
+                                              >
+                            </DataGrid>
+                            <TextBlock x:Name="balanceLifetime"></TextBlock>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+                <StackPanel Visibility="{Binding ElementName=monthReportButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
+                    <Border BorderBrush="Black" BorderThickness="2">
+                        <StackPanel>
+                            <TextBlock>Month report</TextBlock>
+                            <DataGrid x:Name="monthReportTable"
+                                                  IsReadOnly="True">
+                            </DataGrid>
+
+                            <TextBlock x:Name="balanceMonth"></TextBlock>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+        
+
     </Grid>
 </Window>
