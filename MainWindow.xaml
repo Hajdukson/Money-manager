@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UsersPanel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="950"
+        Title="MainWindow" Height="600" Width="950"
         ResizeMode="CanMinimize">
     <Window.Background>
         <ImageBrush ImageSource="Images/background.png"/>
@@ -45,10 +45,8 @@
         </ControlTemplate>
     </Window.Resources>
 
-    <Grid>
-
-        <StackPanel Margin="5">
-        <Border HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="3" Margin="10" Padding="5">
+    <StackPanel>
+        <Border HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="3" Margin="15" Padding="5">
             <StackPanel >
                 <WrapPanel>
                     <Label Width="70" Content="Username:"/>
@@ -58,11 +56,10 @@
                     <Label Width="70" Content="Password:" />
                     <PasswordBox Width="150" x:Name="inPasswordBox"/>
                 </WrapPanel>
-                <Button Content="Log in" Template="{StaticResource myButton2}" HorizontalAlignment="Center" Click="Log_in_button"/>
+                <Button Content="Log in" Template="{StaticResource myButton2}" HorizontalAlignment="Center" Click="LogInButton"/>
                 <ToggleButton Content="Create a new account" Template="{StaticResource myButton}" x:Name="toggleButtonToShowMenuCreatUser" HorizontalAlignment="Center"/>
                 <local:UserControl1 Visibility="{Binding IsChecked, Converter={StaticResource BoolVisibilityConverter}, ElementName=toggleButtonToShowMenuCreatUser}"/>
             </StackPanel>
         </Border>
-        </StackPanel>
-    </Grid>
+    </StackPanel>
 </Window>

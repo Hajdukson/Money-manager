@@ -137,6 +137,8 @@
                 </MultiTrigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
+
+        
     </Window.Resources>
 
     <Grid>
@@ -184,6 +186,7 @@
                 <ToggleButton Content="Month report" Width="100" x:Name="monthReportButton" Checked="ShowMothReport" Unchecked="HideMonthReport"/>
                 <ToggleButton Content="Lifetime report"  Width="100" x:Name="lifetimeReportButton" Checked="ShowLifetimeReport" Unchecked="HideLifetimeReport"/>
             </WrapPanel>
+            <Button Width="200" HorizontalAlignment="Left" Click="DeleateAccount">Delate account</Button>
 
             <StackPanel Visibility="{Binding ElementName=incomeButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}" >
                 <Label Content="Income"/>
@@ -202,7 +205,7 @@
                 <Label Content="Outcome"/>
                 <WrapPanel Margin="3">
                     <Label Content="Amount" Width="55"/>
-                    <TextBox Width="120" x:Name="outcomeAmount" />
+                    <TextBox Width="120" x:Name="outcomeAmount"/>
                 </WrapPanel>
                 <WrapPanel Margin="3">
                     <Label Content="Date"  Width="55"/>
@@ -212,18 +215,17 @@
             </StackPanel>
         </StackPanel>
 
-
-        
-        <ScrollViewer  Grid.Column="1" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer  Grid.Column="1" VerticalScrollBarVisibility="Auto"  >
             <StackPanel>
                 <StackPanel Visibility="{Binding ElementName=lifetimeReportButton, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
                     <Border BorderBrush="Black" BorderThickness="2">
                         <StackPanel>
                             <TextBlock>Lifetime report</TextBlock>
                             <DataGrid x:Name="lifetimeReportTable"
-                                              IsReadOnly="True"
-                                              >
-                            </DataGrid>
+                                      IsReadOnly="True"
+                                      CanUserResizeRows="False"
+                                      >
+                             </DataGrid>
                             <TextBlock x:Name="balanceLifetime"></TextBlock>
                         </StackPanel>
                     </Border>
@@ -233,7 +235,9 @@
                         <StackPanel>
                             <TextBlock>Month report</TextBlock>
                             <DataGrid x:Name="monthReportTable"
-                                                  IsReadOnly="True">
+                                      IsReadOnly="True"
+                                      CanUserResizeRows="False"
+                                      >
                             </DataGrid>
 
                             <TextBlock x:Name="balanceMonth"></TextBlock>
@@ -242,7 +246,5 @@
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
-        
-
     </Grid>
 </Window>

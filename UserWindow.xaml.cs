@@ -23,15 +23,16 @@ namespace UsersPanel
     /// </summary>
     public partial class UserWindow : Window
     {
-        Rd _rd = new Rd();
+        Rd _rd;
         Read _read = new Read();
         ObservableCollection<User> _currentUser = new ObservableCollection<User>();
         ObservableCollection<Item> _userItemsMonth = new ObservableCollection<Item>();
         ObservableCollection<Item> _userItemWhole= new ObservableCollection<Item>();
-        Services _services;
+        Services _services = new Services();
         IEnumerable<Item> _items;
-        private ItemType _ItemType;
-        private string _DirToUser;
+        private ItemType _itemType;
+        private string _dirToUser;
+        int _userId;
         public UserWindow(string username)
         {
             InitializeComponent();
@@ -43,31 +44,30 @@ namespace UsersPanel
                 {
                     username = user.Username + ".txt";
                     _currentUser.Add(new User(user.Id, user.Username, user.Password, user.Email));
+                    _userId = user.Id;
                 }
             }
-            _DirToUser = Directory.GetCurrentDirectory() + @"\Users\" + username;
-            _services = new Services();
+            _dirToUser = Directory.GetCurrentDirectory() + @"\Users\" + username;
             myDataGrid.ItemsSource = _currentUser;
+            _rd = new Rd(_dirToUser);
         }
         private void AddIncome(object sender, RoutedEventArgs e)
         {
-            
-            _ItemType = ItemType.Income;
-            _rd.IfUserExists(incomeAmount.Text, incomeDate.SelectedDate, _DirToUser, _ItemType);
+            _itemType = ItemType.Income;
+            _rd.IfUserExists(incomeAmount.Text, incomeDate.SelectedDate, _itemType);
             incomeAmount.Clear();
             //incomeDate.Clear();
         }
         private void AddOutcome(object sender, RoutedEventArgs e)
         {
-            _ItemType = ItemType.Outcome;
-            _rd.IfUserExists(outcomeAmount.Text, outcomeDate.SelectedDate, _DirToUser, _ItemType);
+            _itemType = ItemType.Outcome;
+            _rd.IfUserExists(outcomeAmount.Text, outcomeDate.SelectedDate, _itemType);
             outcomeAmount.Clear();
             //outcomeDate.Clear();
         }
-
         private void ShowMothReport(object sender, RoutedEventArgs e)
         {
-            _items = _rd.ReadItems(_DirToUser);
+            _items = _rd.ReadItems();
             _userItemsMonth = _services.ShowMothReport(_items);
             balanceMonth.Text = "Balance = " + _services.DispalyBalanceMonth(_items) + Environment.NewLine;
             monthReportTable.ItemsSource = _userItemsMonth;   
@@ -80,7 +80,7 @@ namespace UsersPanel
 
         private void ShowLifetimeReport(object sender, RoutedEventArgs e)
         {
-            _items = _rd.ReadItems(_DirToUser);
+            _items = _rd.ReadItems();
             _userItemWhole = _services.ShowLifetiemReport(_items);
             balanceLifetime.Text = "Balance = " +  _services.DispalyBalanceLifetime(_items) + Environment.NewLine;
             lifetimeReportTable.ItemsSource = _userItemWhole;
@@ -90,6 +90,19 @@ namespace UsersPanel
         {
             _userItemWhole = null;
             lifetimeReportTable.ItemsSource = null;
+        }
+
+        private void DeleateAccount(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult resoult = MessageBox.Show("Are you sure?", "Statment", MessageBoxButton.YesNo);
+            
+            if (resoult == MessageBoxResult.Yes)
+            {
+                _read.Remove(_userId);
+                File.Delete(_dirToUser);
+                Close();
+                MessageBox.Show("Your account has been deleted successfully", "Statment");
+            }  
         }
     }
 }

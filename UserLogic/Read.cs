@@ -60,5 +60,24 @@ namespace UsersPanel.UserLogic
             }
             return false;
         }
+        public void Remove(int id)
+        {
+            IEnumerable<string> lines = File.ReadAllLines(FileName._filename);
+            IList<string> toSave = new List<string>();
+
+            foreach (string line in lines)
+                if (!HasId(id, line))
+                    toSave.Add(line);
+
+            File.WriteAllLines(FileName._filename, toSave);
+        }
+        private bool HasId(int id, string line)
+        {
+            string[] columns = line.Split(';');
+
+            int lineId = int.Parse(columns[0]);
+
+            return id == lineId;
+        }
     }
 }

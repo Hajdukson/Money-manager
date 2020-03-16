@@ -10,20 +10,29 @@ namespace UsersPanel.ItemLogic
 {
     class Rd
     {
-        public IEnumerable<Item> ReadItems(string userFile)
+        private string _dirToUser;
+        public Rd(string dirToUser)
+        {
+            _dirToUser = dirToUser;
+        }
+        public IEnumerable<Item> ReadItems()
         {
             IList<Item> items = new List<Item>();
 
-            if (!File.Exists(userFile))
+            if (!File.Exists(_dirToUser))
                 return items;
 
-            IEnumerable<string> lines = File.ReadAllLines(userFile);
+            IEnumerable<string> lines = File.ReadAllLines(_dirToUser);
 
             foreach (string line in lines)
-                items.Add(TextToItems(line));
+            {
+                Item item = TextToItems(line);
+                items.Add(item);
+            }
 
             return items;
         }
+
         private Item TextToItems(string line)
         {
             string[] item = line.Split(';');
@@ -32,7 +41,7 @@ namespace UsersPanel.ItemLogic
 
             if (item[0] == "O")
                 itemType = ItemType.Outcome;
-            
+
             DateTime date = Convert.ToDateTime(item[1]);
             decimal amout = Convert.ToDecimal(item[2]);
 
@@ -53,17 +62,17 @@ namespace UsersPanel.ItemLogic
 
             return line + Environment.NewLine;
         }
-        public void IfUserExists(string amount, DateTime? date, string dirToUser, ItemType itemType)
+        public void IfUserExists(string amount, DateTime? date, ItemType itemType)
         {
-            if (!File.Exists(dirToUser))
+            if ((File.Exists(_dirToUser) && (amount == "" || date == null)) || !File.Exists(_dirToUser) && (amount == "" || date == null))
+                MessageBox.Show("Enter data.", "Warning", MessageBoxButton.OK);
+            else if (!File.Exists(_dirToUser))
             {
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Users");
-                File.WriteAllText(dirToUser, ItemToTxt(new Item(Convert.ToDecimal(amount), Convert.ToDateTime(date), itemType), itemType));
+                File.WriteAllText(_dirToUser, ItemToTxt(new Item(Convert.ToDecimal(amount), Convert.ToDateTime(date), itemType), itemType));
             }
-            else if (File.Exists(dirToUser) && (amount == "" || date == null))
-                MessageBox.Show("Enter data.", "Warning", MessageBoxButton.OK);
             else
-                File.AppendAllText(dirToUser, ItemToTxt(new Item(Convert.ToDecimal(amount), Convert.ToDateTime(date), itemType), itemType));
+                File.AppendAllText(_dirToUser, ItemToTxt(new Item(Convert.ToDecimal(amount), Convert.ToDateTime(date), itemType), itemType));
         }
     }
 }
