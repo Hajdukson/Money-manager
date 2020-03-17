@@ -79,5 +79,31 @@ namespace UsersPanel.UserLogic
 
             return id == lineId;
         }
+        public bool ValidateEmail(string email)
+        {
+            if (email.Contains('@') && email.Contains('.'))
+            {
+                if (email[0] != '@')
+                {
+                    for (int i = 0; i < email.Length; i++)
+                    {
+                        if (email[i] == '@')
+                        {
+                            if (email[i + 1] == '.')
+                                return false;
+                            else
+                            {
+                                for (int j = i + 2; j < email.Length; j++)
+                                {
+                                    if (email[j] == '.')
+                                        return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
     }
 }

@@ -64,7 +64,9 @@ namespace UsersPanel.ItemLogic
         }
         public void IfUserExists(string amount, DateTime? date, ItemType itemType)
         {
-            if ((File.Exists(_dirToUser) && (amount == "" || date == null)) || !File.Exists(_dirToUser) && (amount == "" || date == null))
+            if ((File.Exists(_dirToUser) && (amount == "" || date == null)) || 
+                (!File.Exists(_dirToUser) && (amount == "" || date == null)) ||
+                !AmountOrNot(amount))
                 MessageBox.Show("Enter data.", "Warning", MessageBoxButton.OK);
             else if (!File.Exists(_dirToUser))
             {
@@ -73,6 +75,19 @@ namespace UsersPanel.ItemLogic
             }
             else
                 File.AppendAllText(_dirToUser, ItemToTxt(new Item(Convert.ToDecimal(amount), Convert.ToDateTime(date), itemType), itemType));
+        }
+        private bool AmountOrNot(string amount)
+        {
+            for(int i = 0; i < amount.Length; i++)
+            {
+                if(amount[i] < '0' || amount[i] > '9')
+                {
+                    if (amount[i] == ',')
+                        continue;
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

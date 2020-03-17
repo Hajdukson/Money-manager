@@ -25,7 +25,6 @@ namespace UsersPanel
     {
         Rd _rd;
         Read _read = new Read();
-        ObservableCollection<User> _currentUser = new ObservableCollection<User>();
         ObservableCollection<Item> _userItemsMonth = new ObservableCollection<Item>();
         ObservableCollection<Item> _userItemWhole= new ObservableCollection<Item>();
         Services _services = new Services();
@@ -43,12 +42,13 @@ namespace UsersPanel
                 if (user.Username == username)
                 {
                     username = user.Username + ".txt";
-                    _currentUser.Add(new User(user.Id, user.Username, user.Password, user.Email));
                     _userId = user.Id;
+                    name.Text = user.Username;
+                    id.Text = Convert.ToString(user.Id);
+                    email.Text = user.Email;
                 }
             }
             _dirToUser = Directory.GetCurrentDirectory() + @"\Users\" + username;
-            myDataGrid.ItemsSource = _currentUser;
             _rd = new Rd(_dirToUser);
         }
         private void AddIncome(object sender, RoutedEventArgs e)
@@ -56,20 +56,18 @@ namespace UsersPanel
             _itemType = ItemType.Income;
             _rd.IfUserExists(incomeAmount.Text, incomeDate.SelectedDate, _itemType);
             incomeAmount.Clear();
-            //incomeDate.Clear();
         }
         private void AddOutcome(object sender, RoutedEventArgs e)
         {
             _itemType = ItemType.Outcome;
             _rd.IfUserExists(outcomeAmount.Text, outcomeDate.SelectedDate, _itemType);
             outcomeAmount.Clear();
-            //outcomeDate.Clear();
         }
         private void ShowMothReport(object sender, RoutedEventArgs e)
         {
             _items = _rd.ReadItems();
             _userItemsMonth = _services.ShowMothReport(_items);
-            balanceMonth.Text = "Balance = " + _services.DispalyBalanceMonth(_items) + Environment.NewLine;
+            balanceMonth.Content = "Month Balance = " + _services.DispalyBalanceMonth(_items) + Environment.NewLine;
             monthReportTable.ItemsSource = _userItemsMonth;   
         }
         private void HideMonthReport(object sender, RoutedEventArgs e)
@@ -82,7 +80,7 @@ namespace UsersPanel
         {
             _items = _rd.ReadItems();
             _userItemWhole = _services.ShowLifetiemReport(_items);
-            balanceLifetime.Text = "Balance = " +  _services.DispalyBalanceLifetime(_items) + Environment.NewLine;
+            balanceLifetime.Content = "Lifetime Balance = " +  _services.DispalyBalanceLifetime(_items) + Environment.NewLine;
             lifetimeReportTable.ItemsSource = _userItemWhole;
             
         }
@@ -104,5 +102,6 @@ namespace UsersPanel
                 MessageBox.Show("Your account has been deleted successfully", "Statment");
             }  
         }
+
     }
 }

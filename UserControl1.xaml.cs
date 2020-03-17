@@ -36,15 +36,17 @@ namespace UsersPanel
                 MessageBox.Show("Enter all data.", "Warning", MessageBoxButton.OK);
             else if (onPasswordBox.Password != onRePasswordBox.Password)
                 MessageBox.Show("Passwords should be the same.", "Warning", MessageBoxButton.OK);
+            else if (!read.ValidateEmail(emailBox.Text))
+                MessageBox.Show("Email is not valid.", "Warning", MessageBoxButton.OK);
             else
             {
-                if (!read.ThatUserExist(onUsernameBox.Text, emailBox.Text))
-                {
-                    write.AddUser(onUsernameBox.Text, onPasswordBox.Password, emailBox.Text);
-                    MessageBox.Show("Account was created successfully.", "Nice work", MessageBoxButton.OK);
-                }
-                else
-                    MessageBox.Show("That eamil or username has already been used.", "Warning");
+                 if (!read.ThatUserExist(onUsernameBox.Text, emailBox.Text))
+                 {
+                     write.AddUser(onUsernameBox.Text, onPasswordBox.Password, emailBox.Text);
+                     MessageBox.Show("Account was created successfully.", "Nice work", MessageBoxButton.OK);
+                 }
+                 else
+                     MessageBox.Show("That eamil or username has already been used.", "Warning", MessageBoxButton.OK);
 
                 onUsernameBox.Clear();
                 onPasswordBox.Clear();
