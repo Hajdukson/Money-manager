@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <ControlTemplate TargetType="Button" x:Key="myButton2">
+        <ControlTemplate TargetType="{x:Type Button}" x:Key="myButton">
             <ControlTemplate.Triggers>
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
@@ -17,7 +17,7 @@
                     <Setter Property="Cursor" Value="Hand"/>
                 </MultiDataTrigger>
             </ControlTemplate.Triggers>
-            <TextBlock HorizontalAlignment="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=HorizontalAlignment}">
+            <TextBlock>
                 <ContentPresenter/>
             </TextBlock>
         </ControlTemplate>
@@ -40,7 +40,7 @@
                 <Label Width="70" >E-mail:</Label>
                 <TextBox Width="150" x:Name="emailBox"/>
             </WrapPanel>
-            <Button Template="{StaticResource myButton2}" HorizontalAlignment="Center" Click="Create_account_button">Create</Button>
+            <Button Template="{StaticResource myButton}" HorizontalAlignment="Center" Click="Create_account_button">Create</Button>
         </StackPanel>
     </Grid>
 </UserControl>

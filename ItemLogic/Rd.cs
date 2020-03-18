@@ -32,7 +32,6 @@ namespace UsersPanel.ItemLogic
 
             return items;
         }
-
         private Item TextToItems(string line)
         {
             string[] item = line.Split(';');
@@ -64,17 +63,20 @@ namespace UsersPanel.ItemLogic
         }
         public void IfUserExists(string amount, DateTime? date, ItemType itemType)
         {
+            decimal supply = decimal.Round(Convert.ToDecimal(amount), 2);
+
             if ((File.Exists(_dirToUser) && (amount == "" || date == null)) || 
                 (!File.Exists(_dirToUser) && (amount == "" || date == null)) ||
                 !AmountOrNot(amount))
                 MessageBox.Show("Enter data.", "Warning", MessageBoxButton.OK);
             else if (!File.Exists(_dirToUser))
             {
+                
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Users");
-                File.WriteAllText(_dirToUser, ItemToTxt(new Item(Convert.ToDecimal(amount), Convert.ToDateTime(date), itemType), itemType));
+                File.WriteAllText(_dirToUser, ItemToTxt(new Item(supply, Convert.ToDateTime(date), itemType), itemType));
             }
             else
-                File.AppendAllText(_dirToUser, ItemToTxt(new Item(Convert.ToDecimal(amount), Convert.ToDateTime(date), itemType), itemType));
+                File.AppendAllText(_dirToUser, ItemToTxt(new Item(supply, Convert.ToDateTime(date), itemType), itemType));
         }
         private bool AmountOrNot(string amount)
         {

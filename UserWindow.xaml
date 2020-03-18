@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UsersPanel"
+        xmlns:sys="clr-namespace:System;assembly=System"
         mc:Ignorable="d"
         Title="UserWindow" Height="550" Width="900"
         ResizeMode="CanMinimize"
@@ -169,7 +170,19 @@
                 <StackPanel Visibility="{Binding ElementName=buttonToShowMonthRep, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
                     <DataGrid x:Name="monthReportTable"
                               IsReadOnly="True"
-                              />
+                              AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Type" Binding="{Binding Path=Type}"/>
+                            <DataGridTextColumn Header="Amount" Binding="{Binding Path=Amount}"/>
+                            <DataGridTemplateColumn Header="Date">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label ContentStringFormat="dd/MM/yyyy" Content="{Binding Path=Date}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Label x:Name="balanceMonth" FontWeight="Bold"/>
                 </StackPanel>
             </ScrollViewer>
@@ -177,7 +190,21 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Grid.Column="1">
                 <StackPanel  Visibility="{Binding ElementName=buttonToShowLifetimeRep, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
                     <DataGrid x:Name="lifetimeReportTable"
-                              IsReadOnly="True"/>
+                              IsReadOnly="True"
+                              AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Type" Binding="{Binding Path=Type}"/>
+                            <DataGridTextColumn Header="Amount" Binding="{Binding Path=Amount}"/>
+                            <DataGridTemplateColumn Header="Date">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label ContentStringFormat="dd/MM/yyyy" Content="{Binding Path=Date}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+
+                    </DataGrid>
                     <Label x:Name="balanceLifetime" FontWeight="Bold"/>
                 </StackPanel>
             </ScrollViewer>
