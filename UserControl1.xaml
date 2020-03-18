@@ -24,19 +24,19 @@
     </UserControl.Resources>
     <Grid>
         <StackPanel>
-            <WrapPanel>
+            <WrapPanel Margin="3">
                 <Label Width="70">Username:</Label>
                 <TextBox Width="150" x:Name="onUsernameBox"/>
             </WrapPanel>
-            <WrapPanel>
+            <WrapPanel Margin="3">
                 <Label Width="70">Password:</Label>
                 <PasswordBox Width="150" x:Name="onPasswordBox"/>
             </WrapPanel>
-            <WrapPanel>
+            <WrapPanel Margin="3">
                 <Label Width="70" >Repeat:</Label>
                 <PasswordBox Width="150" x:Name="onRePasswordBox"/>
             </WrapPanel>
-            <WrapPanel>
+            <WrapPanel Margin="3">
                 <Label Width="70" >E-mail:</Label>
                 <TextBox Width="150" x:Name="emailBox"/>
             </WrapPanel>

@@ -12,12 +12,14 @@ namespace UsersPanel.ItemLogic
         public ItemType Type { get; set; }
         public decimal Amount { get; set; }
         public DateTime Date { get; set; }
+        public string Notes { get; set; }
 
-        public Item(decimal amount, DateTime date, ItemType itemType)
+        public Item(decimal amount, DateTime date, ItemType itemType, string notes)
         {
             Amount = amount;
             Date = date;
             Type = itemType;
+            Notes = notes;
         }
     }
 }

@@ -106,6 +106,26 @@
             </Setter>
         </Style>
         <local:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
+        <Style TargetType="{x:Type ToggleButton}">
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsMouseOver" Value="True"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsMouseOver" Value="True"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
 
     </Window.Resources>
 
@@ -114,15 +134,16 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Image Source="Images/usermoney.jpg" Margin="287,132,421,21"/>
+        <Image Source="Images/usermoney.jpg" Margin="227,108,361,23"/>
+        
 
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="321"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0" Margin="10,16,285,35">
+            <StackPanel Grid.Column="0" Margin="10,16,367,35">
                 <ToggleButton Content="Income" x:Name="getIncome" Height="30" Margin="5"/>
                 <ToggleButton Content="Outcome" x:Name="getOutcome" Height="30" Margin="5"/>
 
@@ -132,30 +153,32 @@
                 <Button  Content="Delete account" Click="DeleateAccount" Height="30" Margin="5"/>
             </StackPanel>
 
-            <WrapPanel Visibility="{Binding ElementName=getIncome, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}" Margin="237,24,5,198">
+            <WrapPanel Visibility="{Binding ElementName=getIncome, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}" Margin="213,24,10,198">
                 <DatePicker  x:Name="incomeDate"/>
                 <TextBox x:Name="incomeAmount" Width="87"/>
-                <Button Content="Add" Click="AddIncome" Width="35" Height="30"/>
+                <TextBox x:Name="notesIncome" Width="121"/>
+                <Button Content="Add" Click="AddIncome" Width="36" Height="30"/>
             </WrapPanel>
 
-            <WrapPanel Visibility="{Binding ElementName=getOutcome, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}" Margin="237,63,5,161">
+            <WrapPanel Visibility="{Binding ElementName=getOutcome, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}" Margin="213,63,10,161">
                 <DatePicker x:Name="outcomeDate"/>
                 <TextBox x:Name="outcomeAmount" Width="87"/>
+                <TextBox x:Name="notesOutcome" Width="121"/>
                 <Button Content="Add" Click="AddOutcome" Width="35" Height="30"/>
             </WrapPanel>
 
-            <StackPanel Grid.Column="1" Height="200" Margin="36,31,36,30">
+            <StackPanel Grid.Column="1" Margin="10,54,0,10">
                 <WrapPanel Margin="5" Background="Bisque">
                     <Label Content="Username:" FontWeight="Bold" FontSize="20" Width="115"/>
-                    <TextBlock x:Name="name" FontSize="20" HorizontalAlignment="Center" Width="200"></TextBlock>
+                    <TextBlock x:Name="name" FontSize="15" HorizontalAlignment="Center" Width="183" VerticalAlignment="Center"></TextBlock>
                 </WrapPanel>
                 <WrapPanel Margin="5" Background="Bisque">
-                    <Label Content="Id:" FontWeight="Bold" FontSize="20" Width="115"/>
-                    <TextBlock x:Name="id" FontSize="20" HorizontalAlignment="Center" Width="200"></TextBlock>
+                    <Label Content="User ID:" FontWeight="Bold" FontSize="20" Width="115"/>
+                    <TextBlock x:Name="id" FontSize="15" HorizontalAlignment="Center" Width="186" VerticalAlignment="Center"></TextBlock>
                 </WrapPanel>
                 <WrapPanel Margin="5" Background="Bisque">
-                    <Label Content="Email:" FontWeight="Bold" FontSize="20" Width="115"/>
-                    <TextBlock x:Name="email" FontSize="20" HorizontalAlignment="Center" Width="200"></TextBlock>
+                    <Label Content="Email:" FontWeight="Bold" FontSize="20" Width="79"/>
+                    <TextBlock x:Name="email" FontSize="15" HorizontalAlignment="Center" Width="220" VerticalAlignment="Center"></TextBlock>
                 </WrapPanel>
             </StackPanel>
         </Grid>
@@ -177,10 +200,11 @@
                             <DataGridTemplateColumn Header="Date">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Label ContentStringFormat="dd/MM/yyyy" Content="{Binding Path=Date}"/>
+                                        <Label ContentStringFormat="dd/MM/yyyy" Content="{Binding Path=Date}" VerticalAlignment="Top"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Notes" Binding="{Binding Path=Notes}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Label x:Name="balanceMonth" FontWeight="Bold"/>
@@ -202,6 +226,7 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Notes" Binding="{Binding Path=Notes}"/>
                         </DataGrid.Columns>
 
                     </DataGrid>

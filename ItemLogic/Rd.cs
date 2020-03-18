@@ -43,8 +43,9 @@ namespace UsersPanel.ItemLogic
 
             DateTime date = Convert.ToDateTime(item[1]);
             decimal amout = Convert.ToDecimal(item[2]);
+            string notes = item[3];
 
-            return new Item(amout, date, itemType);
+            return new Item(amout, date, itemType, notes);
         }
         private string ItemToTxt(Item item, ItemType itemType)
         {
@@ -53,17 +54,17 @@ namespace UsersPanel.ItemLogic
             if (itemType == ItemType.Outcome)
                 type = "O";
 
-            string line = string.Format("{0};{1};{2}",
+            string line = string.Format("{0};{1};{2};{3}",
                 type,
                 item.Date.ToString("dd-MM-yyyy"),
-                item.Amount
+                item.Amount,
+                item.Notes
                 );
 
             return line + Environment.NewLine;
         }
-        public void IfUserExists(string amount, DateTime? date, ItemType itemType)
+        public void IfUserExists(string amount, DateTime? date, ItemType itemType, string notes)
         {
-            decimal supply = decimal.Round(Convert.ToDecimal(amount), 2);
 
             if ((File.Exists(_dirToUser) && (amount == "" || date == null)) || 
                 (!File.Exists(_dirToUser) && (amount == "" || date == null)) ||
@@ -71,12 +72,11 @@ namespace UsersPanel.ItemLogic
                 MessageBox.Show("Enter data.", "Warning", MessageBoxButton.OK);
             else if (!File.Exists(_dirToUser))
             {
-                
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Users");
-                File.WriteAllText(_dirToUser, ItemToTxt(new Item(supply, Convert.ToDateTime(date), itemType), itemType));
+                File.WriteAllText(_dirToUser, ItemToTxt(new Item(decimal.Round(Convert.ToDecimal(amount), 2), Convert.ToDateTime(date), itemType, notes), itemType));
             }
             else
-                File.AppendAllText(_dirToUser, ItemToTxt(new Item(supply, Convert.ToDateTime(date), itemType), itemType));
+                File.AppendAllText(_dirToUser, ItemToTxt(new Item(decimal.Round(Convert.ToDecimal(amount), 2), Convert.ToDateTime(date), itemType, notes), itemType));
         }
         private bool AmountOrNot(string amount)
         {

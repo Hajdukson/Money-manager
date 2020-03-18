@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="950"
         ResizeMode="CanMinimize">
+    
     <Window.Background>
         <ImageBrush ImageSource="Images/background.png"/>
     </Window.Background>
@@ -48,11 +49,11 @@
     <StackPanel>
         <Border HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="3" Margin="15" Padding="5">
             <StackPanel >
-                <WrapPanel>
+                <WrapPanel Margin="3">
                     <Label Width="70" Content="Username:"/>
                     <TextBox Width="150" x:Name="inUsernameBox"/>
                 </WrapPanel>
-                <WrapPanel>
+                <WrapPanel Margin="3">
                     <Label Width="70" Content="Password:" />
                     <PasswordBox Width="150" x:Name="inPasswordBox"/>
                 </WrapPanel>

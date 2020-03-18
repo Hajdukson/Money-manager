@@ -54,13 +54,13 @@ namespace UsersPanel
         private void AddIncome(object sender, RoutedEventArgs e)
         {
             _itemType = ItemType.Income;
-            _rd.IfUserExists(incomeAmount.Text, incomeDate.SelectedDate, _itemType);
+            _rd.IfUserExists(incomeAmount.Text, incomeDate.SelectedDate, _itemType, notesIncome.Text);
             incomeAmount.Clear();
         }
         private void AddOutcome(object sender, RoutedEventArgs e)
         {
             _itemType = ItemType.Outcome;
-            _rd.IfUserExists(outcomeAmount.Text, outcomeDate.SelectedDate, _itemType);
+            _rd.IfUserExists(outcomeAmount.Text, outcomeDate.SelectedDate, _itemType, notesOutcome.Text);
             outcomeAmount.Clear();
         }
         private void ShowMothReport(object sender, RoutedEventArgs e)
@@ -102,6 +102,5 @@ namespace UsersPanel
                 MessageBox.Show("Your account has been deleted successfully", "Statment");
             }  
         }
-
     }
 }
