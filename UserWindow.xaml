@@ -153,15 +153,15 @@
                 <Button  Content="Delete account" Click="DeleateAccount" Height="30" Margin="5"/>
             </StackPanel>
 
-            <WrapPanel Visibility="{Binding ElementName=getIncome, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}" Margin="213,24,10,198">
-                <DatePicker  x:Name="incomeDate"/>
+            <WrapPanel Visibility="{Binding ElementName=getIncome, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}" Margin="213,24,0,198">
+                <DatePicker  x:Name="incomeDate" Language="Engilish"/>
                 <TextBox x:Name="incomeAmount" Width="87"/>
                 <TextBox x:Name="notesIncome" Width="121"/>
                 <Button Content="Add" Click="AddIncome" Width="36" Height="30"/>
             </WrapPanel>
 
-            <WrapPanel Visibility="{Binding ElementName=getOutcome, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}" Margin="213,63,10,161">
-                <DatePicker x:Name="outcomeDate"/>
+            <WrapPanel Visibility="{Binding ElementName=getOutcome, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}" Margin="213,63,0,161">
+                <DatePicker x:Name="outcomeDate" Language="Engilish"/>
                 <TextBox x:Name="outcomeAmount" Width="87"/>
                 <TextBox x:Name="notesOutcome" Width="121"/>
                 <Button Content="Add" Click="AddOutcome" Width="35" Height="30"/>
@@ -195,8 +195,20 @@
                               IsReadOnly="True"
                               AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Type" Binding="{Binding Path=Type}"/>
-                            <DataGridTextColumn Header="Amount" Binding="{Binding Path=Amount}"/>
+                            <DataGridTemplateColumn Header="Type">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding Path=Type}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Amount">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding Path=Amount}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                             <DataGridTemplateColumn Header="Date">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -204,7 +216,13 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Notes" Binding="{Binding Path=Notes}"/>
+                            <DataGridTemplateColumn Header="Notes">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding Path=Notes}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Label x:Name="balanceMonth" FontWeight="Bold"/>
@@ -217,8 +235,20 @@
                               IsReadOnly="True"
                               AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Type" Binding="{Binding Path=Type}"/>
-                            <DataGridTextColumn Header="Amount" Binding="{Binding Path=Amount}"/>
+                            <DataGridTemplateColumn Header="Type">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label  Content="{Binding Path=Type}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Amount">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label  Content="{Binding Path=Amount}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                             <DataGridTemplateColumn Header="Date">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -226,7 +256,13 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Notes" Binding="{Binding Path=Notes}"/>
+                            <DataGridTemplateColumn Header="Notes">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding Path=Notes}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
 
                     </DataGrid>

@@ -69,7 +69,7 @@ namespace UsersPanel.ItemLogic
             if ((File.Exists(_dirToUser) && (amount == "" || date == null)) || 
                 (!File.Exists(_dirToUser) && (amount == "" || date == null)) ||
                 !AmountOrNot(amount))
-                MessageBox.Show("Enter data.", "Warning", MessageBoxButton.OK);
+                MessageBox.Show("Enter date and amount.", "Warning", MessageBoxButton.OK);
             else if (!File.Exists(_dirToUser))
             {
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Users");
