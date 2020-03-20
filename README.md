@@ -9,4 +9,4 @@
 * Now user can manage his money and be happy knowing his month or lifetime balacne  
 
 ## How to run the aplication
-Open up your copy, compile or running the executable file under /Bin/Debug directory..
+Open up your copy, compile or run the executable file under /Bin/Debug directory..
