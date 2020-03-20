@@ -21,7 +21,7 @@ namespace UsersPanel
     /// </summary>
     public partial class MainWindow : Window
     {
-        Read read = new Read();
+        UserReader read = new UserReader();
         public MainWindow()
         {
             InitializeComponent();

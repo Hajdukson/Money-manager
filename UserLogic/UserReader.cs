@@ -8,16 +8,16 @@ using System.Windows;
 
 namespace UsersPanel.UserLogic
 {
-    class Read
+    class UserReader
     {
         public IEnumerable<User> ReadAll()
         {
             IList<User> users = new List<User>();
 
-            if (!File.Exists(FileName._filename))
+            if (!File.Exists(DbName._filename))
                 return users;
 
-            IEnumerable<String> lines = File.ReadAllLines(FileName._filename);
+            IEnumerable<String> lines = File.ReadAllLines(DbName._filename);
 
             foreach(string line in lines)
             {
@@ -62,14 +62,14 @@ namespace UsersPanel.UserLogic
         }
         public void Remove(int id)
         {
-            IEnumerable<string> lines = File.ReadAllLines(FileName._filename);
+            IEnumerable<string> lines = File.ReadAllLines(DbName._filename);
             IList<string> toSave = new List<string>();
 
             foreach (string line in lines)
                 if (!HasId(id, line))
                     toSave.Add(line);
 
-            File.WriteAllLines(FileName._filename, toSave);
+            File.WriteAllLines(DbName._filename, toSave);
         }
         private bool HasId(int id, string line)
         {

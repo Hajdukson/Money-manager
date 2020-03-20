@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UsersPanel.UserLogic
 {
-    public static class FileName
+    public static class DbName
     {
         public static string _filename = "database.txt";
     }

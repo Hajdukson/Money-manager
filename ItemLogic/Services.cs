@@ -32,7 +32,7 @@ namespace UsersPanel.ItemLogic
         }
         public string DispalyBalanceMonth(IEnumerable<Item> items)
         {
-            decimal sum = 0.0M;
+            decimal sum = 0.00M;
 
             sum = SumIncomesMonth(items) - SumOutcomesMonth(items);
 
@@ -40,14 +40,14 @@ namespace UsersPanel.ItemLogic
         }
         public string DispalyBalanceLifetime(IEnumerable<Item> items)
         {
-            decimal sum = 0.0M;
+            decimal sum = 0.00M;
             sum = SumIncomesLifetime(items) - SumOutcomesLifetime(items);
 
             return "" + sum;
         }
         private decimal SumIncomesLifetime(IEnumerable<Item> items)
         {
-            decimal sum = 0.0M;
+            decimal sum = 0.00M;
             foreach (Item item in items)
             {
                 if (item.Type == ItemType.Income)
@@ -59,7 +59,7 @@ namespace UsersPanel.ItemLogic
         }
         private decimal SumOutcomesLifetime(IEnumerable<Item> items)
         {
-            decimal sum = 0.0M;
+            decimal sum = 0.00M;
             foreach (Item item in items)
             {
                 if (item.Type == ItemType.Outcome)
@@ -71,10 +71,11 @@ namespace UsersPanel.ItemLogic
         }
         private decimal SumIncomesMonth(IEnumerable<Item> items)
         {
-            decimal sum = 0.0M;
+            decimal sum = 0.00M;
             foreach (Item item in items)
             {
-                if (item.Type == ItemType.Income && (item.Date.Year == DateTime.Now.Year && item.Date.Month == DateTime.Now.Month))
+                if (item.Type == ItemType.Income && 
+                    (item.Date.Year == DateTime.Now.Year && item.Date.Month == DateTime.Now.Month))
                 {
                     sum += item.Amount;
                 }
@@ -83,10 +84,11 @@ namespace UsersPanel.ItemLogic
         }
         private decimal SumOutcomesMonth(IEnumerable<Item> items)
         {
-            decimal sum = 0.0M;
+            decimal sum = 0.00M;
             foreach (Item item in items)
             {
-                if (item.Type == ItemType.Outcome && (item.Date.Year == DateTime.Now.Year && item.Date.Month == DateTime.Now.Month))
+                if (item.Type == ItemType.Outcome && 
+                    (item.Date.Year == DateTime.Now.Year &&item.Date.Month == DateTime.Now.Month))
                 {
                     sum += item.Amount;
                 }

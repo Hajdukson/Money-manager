@@ -22,8 +22,8 @@ namespace UsersPanel
     /// </summary>
     public partial class UserControl1 : UserControl
     {
-        Write write = new Write();
-        Read read = new Read();
+        UserWriter write = new UserWriter();
+        UserReader read = new UserReader();
         public UserControl1()
         {
             InitializeComponent();
