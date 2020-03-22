@@ -9,10 +9,10 @@ namespace UsersPanel.ItemLogic
 {
     class Item
     {
-        public ItemType Type { get; set; }
-        public decimal Amount { get; set; }
-        public DateTime Date { get; set; }
-        public string Notes { get; set; }
+        public ItemType Type { get; private set; }
+        public decimal Amount { get; private set; }
+        public DateTime Date { get; private set; }
+        public string Notes { get; private set; }
 
         public Item(decimal amount, DateTime date, ItemType itemType, string notes)
         {
