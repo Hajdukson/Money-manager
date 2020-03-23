@@ -59,15 +59,31 @@ namespace UsersPanel
         
         private void AddIncome(object sender, RoutedEventArgs e)
         {
-            _itemType = ItemType.Income;
-            _writeItem.AddItem(incomeAmount.Text, incomeDate.SelectedDate, _itemType, notesIncome.Text);
+            try
+            {
+                _itemType = ItemType.Income;
+                _writeItem.AddItem(decimal.Round(decimal.Parse(incomeAmount.Text), 2), 
+                    incomeDate.SelectedDate, _itemType, notesIncome.Text);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Enter date and amount.", "Warning", MessageBoxButton.OK);
+            }
             incomeAmount.Clear();
             notesIncome.Clear();
         }
         private void AddOutcome(object sender, RoutedEventArgs e)
         {
-            _itemType = ItemType.Outcome;
-            _writeItem.AddItem(outcomeAmount.Text, outcomeDate.SelectedDate, _itemType, notesOutcome.Text);
+            try
+            {
+                _itemType = ItemType.Outcome;
+                _writeItem.AddItem(decimal.Round(decimal.Parse(outcomeAmount.Text), 2),
+                    outcomeDate.SelectedDate, _itemType, notesOutcome.Text);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Enter date and amount.", "Warning", MessageBoxButton.OK);
+            }
             outcomeAmount.Clear();
             notesOutcome.Clear();
         }

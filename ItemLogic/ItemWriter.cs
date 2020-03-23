@@ -15,15 +15,11 @@ namespace UsersPanel.ItemLogic
         {
             _dirToUser = dirToUser;
         }
-
-        public void AddItem(string amount, DateTime? date, ItemType itemType, string notes)
+        public void AddItem(decimal amount, DateTime? date, ItemType itemType, string notes)
         {
+            Item item = new Item(amount, Convert.ToDateTime(date), itemType, notes);
 
-            Item item = new Item(decimal.Round(Convert.ToDecimal(amount), 2), Convert.ToDateTime(date), itemType, notes);
-
-            if ((File.Exists(_dirToUser) && (amount == "" || date == null)) ||
-                (!File.Exists(_dirToUser) && (amount == "" || date == null)) ||
-                !AmountOrNot(amount))
+            if ((File.Exists(_dirToUser) && date == null) || (!File.Exists(_dirToUser) && date == null))
                 MessageBox.Show("Enter date and amount.", "Warning", MessageBoxButton.OK);
             else if (!File.Exists(_dirToUser))
             {
@@ -48,19 +44,6 @@ namespace UsersPanel.ItemLogic
                 );
 
             return line + Environment.NewLine;
-        }
-        private bool AmountOrNot(string amount)
-        {
-            for (int i = 0; i < amount.Length; i++)
-            {
-                if (amount[i] < '0' || amount[i] > '9')
-                {
-                    if (amount[i] == ',')
-                        continue;
-                    return false;
-                }
-            }
-            return true;
         }
     }
 }
