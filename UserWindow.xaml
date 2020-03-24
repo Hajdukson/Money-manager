@@ -135,14 +135,13 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Image Source="Images/usermoney.jpg" Margin="227,108,361,23"/>
-        
+
 
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="321"/>
             </Grid.ColumnDefinitions>
-
             <StackPanel Grid.Column="0" Margin="10,16,367,35">
                 <ToggleButton Content="Income" x:Name="getIncome" Height="30" Margin="5"/>
                 <ToggleButton Content="Outcome" x:Name="getOutcome" Height="30" Margin="5"/>
@@ -155,15 +154,27 @@
 
             <WrapPanel Visibility="{Binding ElementName=getIncome, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}" Margin="213,24,0,198">
                 <DatePicker  x:Name="incomeDate" Language="Engilish"/>
-                <TextBox x:Name="incomeAmount" Width="87"/>
-                <TextBox x:Name="notesIncome" Width="121"/>
+                <Grid Width="Auto" Height="Auto">
+                    <TextBox x:Name="incomeAmount" HorizontalAlignment="Left" Width="87" LostFocus="IncomeAmount_LostFocus"/>
+                    <TextBox x:Name="wahtermarkedTextInAmount" Text="Amount" HorizontalAlignment="Left" Width="87" GotFocus="WmIncomeAmount_GotFocus"/>
+                </Grid>
+                <Grid Width="Auto" Height="Auto">
+                    <TextBox x:Name="notesIncome" HorizontalAlignment="Left" Width="121" LostFocus="IncomeNotes_LostFocus"/>
+                    <TextBox x:Name="watermarkedTextInNotes" Text="Notes" HorizontalAlignment="Left" Width="121" GotFocus="WmIncomeNotes_GotFocus"/>
+                </Grid>
                 <Button Content="Add" Click="AddIncome" Width="36" Height="30"/>
             </WrapPanel>
 
             <WrapPanel Visibility="{Binding ElementName=getOutcome, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}" Margin="213,63,0,161">
-                <DatePicker x:Name="outcomeDate" Language="Engilish"/>
-                <TextBox x:Name="outcomeAmount" Width="87"/>
-                <TextBox x:Name="notesOutcome" Width="121"/>
+                <DatePicker x:Name="outcomeDate" Language="Engilish" />
+                <Grid Width="Auto" Height="Auto">
+                    <TextBox x:Name="outcomeAmount" HorizontalAlignment="Left" Width="87" LostFocus="OutcomeAmount_LostFocus"/>
+                    <TextBox x:Name="watermarkedTextOuAmount"  Text="Amount" HorizontalAlignment="Left" Width="87" GotFocus="WmOutcomeAmount_GotFocus"/>
+                </Grid>
+                <Grid Width="Auto" Height="Auto">
+                    <TextBox x:Name="notesOutcome" HorizontalAlignment="Left" Width="121" LostFocus="OutcomeNotes_LostFocus"/>
+                    <TextBox x:Name="watermarkedTextOuNotes" Text="Notes" HorizontalAlignment="Left" Width="121" GotFocus="WmOutcomeNotes_GotFocus"/>
+                </Grid>
                 <Button Content="Add" Click="AddOutcome" Width="35" Height="30"/>
             </WrapPanel>
 

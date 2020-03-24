@@ -56,13 +56,13 @@ namespace UsersPanel
             _writeItem = new ItemWriter(_dirToUser);
             _itemReader = new ItemReader(_dirToUser);
         }
-        
+
         private void AddIncome(object sender, RoutedEventArgs e)
         {
             try
             {
                 _itemType = ItemType.Income;
-                _writeItem.AddItem(decimal.Round(decimal.Parse(incomeAmount.Text), 2), 
+                _writeItem.AddItem(decimal.Round(decimal.Parse(incomeAmount.Text), 2),
                     incomeDate.SelectedDate, _itemType, notesIncome.Text);
             }
             catch (Exception)
@@ -92,7 +92,7 @@ namespace UsersPanel
             _items = _itemReader.ReadItems();
             _userItemsMonth = _services.ShowMothReport(_items);
             balanceMonth.Content = "Month Balance = " + _services.DispalyBalanceMonth(_items) + Environment.NewLine;
-            monthReportTable.ItemsSource = _userItemsMonth;   
+            monthReportTable.ItemsSource = _userItemsMonth;
         }
         private void HideMonthReport(object sender, RoutedEventArgs e)
         {
@@ -104,9 +104,9 @@ namespace UsersPanel
         {
             _items = _itemReader.ReadItems();
             _userItemWhole = _services.ShowLifetiemReport(_items);
-            balanceLifetime.Content = "Lifetime Balance = " +  _services.DispalyBalanceLifetime(_items) + Environment.NewLine;
+            balanceLifetime.Content = "Lifetime Balance = " + _services.DispalyBalanceLifetime(_items) + Environment.NewLine;
             lifetimeReportTable.ItemsSource = _userItemWhole;
-            
+
         }
         private void HideLifetimeReport(object sender, RoutedEventArgs e)
         {
@@ -117,14 +117,77 @@ namespace UsersPanel
         private void DeleateAccount(object sender, RoutedEventArgs e)
         {
             MessageBoxResult resoult = MessageBox.Show("Are you sure?", "Statment", MessageBoxButton.YesNo);
-            
+
             if (resoult == MessageBoxResult.Yes)
             {
                 _readUser.Remove(_userId);
                 File.Delete(_dirToUser);
                 Close();
                 MessageBox.Show("Your account has been deleted successfully", "Statment");
-            }  
+            }
+        }
+        // // // // // // // // // // // // // // // // // // // // // // // // Income watermarker
+        private void WmIncomeAmount_GotFocus(object sender, RoutedEventArgs e)
+        {
+            wahtermarkedTextInAmount.Visibility = Visibility.Collapsed;
+            incomeAmount.Visibility = Visibility.Visible;
+            incomeAmount.Focus();
+        }
+
+        private void IncomeAmount_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(incomeAmount.Text))
+            {
+                incomeAmount.Visibility = Visibility.Collapsed;
+                wahtermarkedTextInAmount.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void WmIncomeNotes_GotFocus(object sender, RoutedEventArgs e)
+        {
+            watermarkedTextInNotes.Visibility = Visibility.Collapsed;
+            notesIncome.Visibility = Visibility.Visible;
+            notesIncome.Focus();
+        }
+
+        private void IncomeNotes_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(notesIncome.Text))
+            {
+                notesIncome.Visibility = Visibility.Collapsed;
+                watermarkedTextInNotes.Visibility = Visibility.Visible;
+            }
+        }
+        // // // // // // // // // // // // // // // // // // // // // // // // Outcome watermarker
+        private void WmOutcomeAmount_GotFocus(object sender, RoutedEventArgs e)
+        {
+            watermarkedTextOuAmount.Visibility = Visibility.Collapsed;
+            outcomeAmount.Visibility = Visibility.Visible;
+            outcomeAmount.Focus();
+        }
+        private void OutcomeAmount_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(outcomeAmount.Text))
+            {
+                outcomeAmount.Visibility = Visibility.Collapsed;
+                watermarkedTextOuAmount.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void WmOutcomeNotes_GotFocus(object sender, RoutedEventArgs e)
+        {
+            watermarkedTextOuNotes.Visibility = Visibility.Collapsed;
+            notesOutcome.Visibility = Visibility.Visible;
+            notesOutcome.Focus();
+        }
+
+        private void OutcomeNotes_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(notesOutcome.Text))
+            {
+                notesOutcome.Visibility = Visibility.Collapsed;
+                watermarkedTextOuNotes.Visibility = Visibility.Visible;
+            }
         }
     }
 }

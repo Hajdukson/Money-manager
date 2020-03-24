@@ -47,25 +47,27 @@ namespace UsersPanel.ItemLogic
 
             return new Item(amout, date, itemType, notes);
         }
-        
-        public void Remove(int id)
-        {
-            IEnumerable<string> lines = File.ReadAllLines(_dirToUser);
-            IList<string> toSave = new List<string>();
+        /*I implemented 'delete' button to datagird before, but I don't know how to use that to remove some item yet.
+         *I had set an Id for every item and tryed to send the value (tryed to use SelectedIndex property) to Remove function, but it failed.
+        */
+        //public void Remove(int id)
+        //{
+        //    IEnumerable<string> lines = File.ReadAllLines(_dirToUser);
+        //    IList<string> toSave = new List<string>();
 
-            foreach(string line in lines)
-            {
-                if(!HasId(id, line))
-                    toSave.Add(line);
-            }
-        }
-        public bool HasId(int id, string line)
-        {
-            string[] clumns = line.Split(';');
+        //    foreach(string line in lines)
+        //    {
+        //        if(!HasId(id, line))
+        //            toSave.Add(line);
+        //    }
+        //}
+        //private bool HasId(int id, string line)
+        //{
+        //    string[] clumns = line.Split(';');
 
-            int lineId = Convert.ToInt32(clumns[0]);
+        //    int lineId = Convert.ToInt32(clumns[0]);
 
-            return lineId == id;
-        }
+        //    return lineId == id;
+        //}
     }
 }
