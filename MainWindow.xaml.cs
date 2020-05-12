@@ -21,24 +21,74 @@ namespace UsersPanel
     /// </summary>
     public partial class MainWindow : Window
     {
+        UserWriter write = new UserWriter(); 
         UserReader read = new UserReader();
         public MainWindow()
         {
             InitializeComponent();
         }
-        private void LogInButton(object sender, RoutedEventArgs e)
+        private void Login_Button(object sender, RoutedEventArgs e)
         {
-            if (inUsernameBox.Text == "" || inPasswordBox.Password == "")
-                MessageBox.Show("Enter all data.", "Warning", MessageBoxButton.OK);
-            else if (read.UserLogIn(inUsernameBox.Text, inPasswordBox.Password))
+            if (read.UserLogIn(UsernameBox.Text, PasswordBox.Password))
             {
-                UserWindow userWindow = new UserWindow(inUsernameBox.Text);
+                UserWindow userWindow = new UserWindow(UsernameBox.Text);
                 userWindow.ShowDialog();
-                inUsernameBox.Clear();
-                inPasswordBox.Clear();
+                UsernameBox.Text = "Username";
+                PasswordBox.Password = "Account";
+                accountCreated.Visibility = Visibility.Collapsed;
+                checkPasswords.Visibility = Visibility.Collapsed;
+                checkUsernameAndPasswordNotification.Visibility = Visibility.Collapsed;
             }
             else
-                MessageBox.Show("Check your username and password.", "Warning", MessageBoxButton.OK);
+            {
+                accountCreated.Visibility = Visibility.Collapsed;
+                checkPasswords.Visibility = Visibility.Collapsed;
+                checkUsernameAndPasswordNotification.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
+        }
+
+        private void Shutdown_Window(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+        private void Minimized_Window(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Normal)
+                WindowState = WindowState.Minimized;
+            else
+                WindowState = WindowState.Normal;
+        }
+        private void Create_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(UsernameBox.Text) || string.IsNullOrWhiteSpace(PasswordBox.Password) ||
+                    string.IsNullOrWhiteSpace(PasswordBox2.Password) || PasswordBox2.Password == "Account" ||
+                    PasswordBox.Password == "Account" || UsernameBox.Text == "Username")
+                MessageBox.Show("Enter all data.", "Warning", MessageBoxButton.OK);
+            else if (PasswordBox.Password != PasswordBox2.Password)
+                checkPasswords.Visibility = Visibility.Visible;
+            else
+            {
+                if (!read.ThatUserExist(UsernameBox.Text))
+                {
+                    write.AddUser(UsernameBox.Text, PasswordBox.Password);
+                    checkUsernameAndPasswordNotification.Visibility = Visibility.Collapsed;
+                    checkPasswords.Visibility = Visibility.Collapsed;
+                    accountCreated.Visibility = Visibility.Visible;
+                }
+                else
+                    MessageBox.Show("That user exist.", "Warning", MessageBoxButton.OK);
+                checkUsernameAndPasswordNotification.Visibility = Visibility.Collapsed;
+                UsernameBox.Text = "Username";
+                PasswordBox.Password = "Account";
+                PasswordBox2.Password = PasswordBox.Password;
+
+            }
         }
     }
 }

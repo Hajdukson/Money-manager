@@ -10,11 +10,11 @@ namespace UsersPanel.UserLogic
 {
     class UserWriter
     {   
-        public void AddUser(string username, string password, string email)
+        public void AddUser(string username, string password)
         {
             int id = GetNextId();
 
-            User user = new User(id, username, password, email);
+            User user = new User(id, username, password);
 
             if (File.Exists(DbName._filename))
                 File.AppendAllText(DbName._filename, UserToTxt(user));
@@ -38,11 +38,10 @@ namespace UsersPanel.UserLogic
         }
         private string UserToTxt(User user)
         {
-            string line = string.Format("{0};{1};{2};{3}",
+            string line = string.Format("{0};{1};{2}",
                 user.Id,
                 user.Username,
-                user.Password,
-                user.Email);
+                user.Password);
 
             return line + Environment.NewLine;
         }

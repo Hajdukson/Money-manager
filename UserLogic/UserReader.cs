@@ -34,18 +34,17 @@ namespace UsersPanel.UserLogic
             int id = Convert.ToInt32(parameters[0]);
             string username = parameters[1];
             string password = parameters[2];
-            string email = parameters[3];
 
-            User user = new User(id, username, password, email);
+            User user = new User(id, username, password);
 
             return user;
         }
-        public bool ThatUserExist(string username, string email)
+        public bool ThatUserExist(string username)
         {
             IEnumerable<User> users = ReadAll();
             foreach (User user in users)
             {
-                if (user.Username == username || user.Email == email)
+                if (user.Username == username)
                     return true;
             }
             return false;
@@ -78,32 +77,6 @@ namespace UsersPanel.UserLogic
             int lineId = int.Parse(columns[0]);
 
             return id == lineId;
-        }
-        public bool ValidateEmail(string email)
-        {
-            if (email.Contains('@') && email.Contains('.'))
-            {
-                if (email[0] != '@')
-                {
-                    for (int i = 0; i < email.Length; i++)
-                    {
-                        if (email[i] == '@')
-                        {
-                            if (email[i + 1] == '.')
-                                return false;
-                            else
-                            {
-                                for (int j = i + 2; j < email.Length; j++)
-                                {
-                                    if (email[j] == '.')
-                                        return true;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            return false;
         }
     }
 }

@@ -49,7 +49,6 @@ namespace UsersPanel
                     _userId = user.Id;
                     name.Text = user.Username;
                     id.Text = Convert.ToString(user.Id);
-                    email.Text = user.Email;
                 }
             }
             _dirToUser = Directory.GetCurrentDirectory() + @"\Users\" + username;
@@ -126,6 +125,22 @@ namespace UsersPanel
                 MessageBox.Show("Your account has been deleted successfully", "Statment");
             }
         }
+        private void Shutdown_Window(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+        private void Minimized_Window(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Normal)
+                WindowState = WindowState.Minimized;
+            else
+                WindowState = WindowState.Normal;
+        }
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
+        }
         // // // // // // // // // // // // // // // // // // // // // // // // Income watermarker
         private void WmIncomeAmount_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -189,5 +204,6 @@ namespace UsersPanel
                 watermarkedTextOuNotes.Visibility = Visibility.Visible;
             }
         }
+
     }
 }

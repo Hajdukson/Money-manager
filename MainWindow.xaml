@@ -3,64 +3,175 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:UsersPanel"
+        xmlns:local="clr-namespace:UsersPanel" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="950"
-        ResizeMode="CanMinimize">
-    
-    <Window.Background>
-        <ImageBrush ImageSource="Images/background.png"/>
-    </Window.Background>
+        Title="Money manager" Height="515" Width="380"
+        AllowsTransparency="True" Background="Transparent"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        MouseDown="Window_MouseDown">
 
     <Window.Resources>
-        <local:BoolVisibilityConverter x:Key="BoolVisibilityConverter"></local:BoolVisibilityConverter>
-
-        <ControlTemplate TargetType="ToggleButton" x:Key="myButton">
-            <ControlTemplate.Triggers>
-                <MultiDataTrigger>
-                    <MultiDataTrigger.Conditions>
-                        <Condition  Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsMouseOver}" Value="True"/>
-                    </MultiDataTrigger.Conditions>
-                    <Setter Property="Foreground" Value="Blue"/>
-                    <Setter Property="Cursor" Value="Hand"/>
-                </MultiDataTrigger>
-            </ControlTemplate.Triggers>
-            <TextBlock>
-                <ContentPresenter/>
-            </TextBlock>
-        </ControlTemplate>
-
-        <ControlTemplate TargetType="Button" x:Key="myButton2">
-            <ControlTemplate.Triggers>
-                <MultiDataTrigger>
-                    <MultiDataTrigger.Conditions>
-                        <Condition  Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsMouseOver}" Value="True"/>
-                    </MultiDataTrigger.Conditions>
-                    <Setter Property="Foreground" Value="Blue"/>
-                    <Setter Property="Cursor" Value="Hand"/>
-                </MultiDataTrigger>
-            </ControlTemplate.Triggers>
-            <TextBlock>
-                <ContentPresenter/>
-            </TextBlock>
-        </ControlTemplate>
+        <local:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
     </Window.Resources>
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="300"/>
+            </Grid.RowDefinitions>
 
-    <StackPanel>
-        <Border HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="3" Margin="15" Padding="5">
-            <StackPanel >
-                <WrapPanel Margin="3">
-                    <Label Width="70" Content="Username:"/>
-                    <TextBox Width="150" x:Name="inUsernameBox"/>
-                </WrapPanel>
-                <WrapPanel Margin="3">
-                    <Label Width="70" Content="Password:" />
-                    <PasswordBox Width="150" x:Name="inPasswordBox"/>
-                </WrapPanel>
-                <Button Content="Log in" Template="{StaticResource myButton2}" HorizontalAlignment="Center" Click="LogInButton"/>
-                <ToggleButton Content="Create a new account" Template="{StaticResource myButton}" x:Name="toggleButtonToShowMenuCreatUser" HorizontalAlignment="Center"/>
-                <local:UserControl1 Visibility="{Binding IsChecked, Converter={StaticResource BoolVisibilityConverter}, ElementName=toggleButtonToShowMenuCreatUser}"/>
+            <Border CornerRadius="10" Grid.RowSpan="2">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#FFDF00" Offset="0.0"/>
+                        <GradientStop Color="#f083da" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+
+            <Grid VerticalAlignment="Center" Grid.Row="0">
+                <Image Source="Images/logo.png" Margin="0,0,0,60"/>
+                <TextBlock
+                           FontSize="22"
+                           FontFamily="helvetica"
+                           Foreground="White" Margin="110,138,110,51" RenderTransformOrigin="0.519,2.885"><Run Text="Mon"/><Run Text="e"/><Run Text="y Manager"/></TextBlock>
+            </Grid>
+
+            <StackPanel Grid.Row="1">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox
+                        FontFamily="Helvetica"
+                        FontWeight="Light"
+                        Text="Username"
+                        FontSize="20"
+                        Foreground="White"
+                        Background="Transparent"
+                        Width="235"
+                        BorderThickness="0"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Left"
+                        Opacity="0.9"
+                        Height="25"
+                        Margin="63,0,0,0"
+                        x:Name="UsernameBox"/>
+                    <iconPacks:PackIconMaterial Kind="Account"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"
+                                                   Foreground="White"/>
+                </StackPanel>
+                <Border Width="250"
+                        Height="2"
+                        Background="White"/>
+                
+                <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                    <PasswordBox
+                        FontFamily="Helvetica"
+                        FontWeight="Light"
+                        Password="Account"
+                        FontSize="20"
+                        Foreground="White"
+                        Background="Transparent"
+                        Width="235"
+                        BorderThickness="0"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Left"
+                        Opacity="0.9"
+                        Height="25"
+                        Margin="63,0,0,0"
+                        x:Name="PasswordBox"/>
+                    <iconPacks:PackIconMaterial Kind="FormTextboxPassword"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"
+                                                   Foreground="White"/>
+                </StackPanel>
+                <Border Width="250"
+                        Height="2"
+                        Background="White"/>
+
+                <StackPanel Visibility="{Binding ElementName=Register, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                        <PasswordBox
+                        FontFamily="Helvetica"
+                        FontWeight="Light"
+                        Password="Account"
+                        FontSize="20"
+                        Foreground="White"
+                        Background="Transparent"
+                        Width="235"
+                        BorderThickness="0"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Left"
+                        Opacity="0.9"
+                        Height="25"
+                        Margin="63,0,0,0"
+                        x:Name="PasswordBox2"/>
+                        <iconPacks:PackIconMaterial Kind="FormTextboxPassword"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"
+                                                   Foreground="White"/>
+                    </StackPanel>
+                    <Border Width="250"
+                        Height="2"
+                        Background="White"/>
+                    <Button  Height="40" Width="80" Content="CREATE" Margin="0,10,0,0" Click="Create_Click" 
+                             x:Name="Create" />
+                </StackPanel>
+
+
             </StackPanel>
-        </Border>
-    </StackPanel>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,83,0,0">
+                <Button  Height="40" Width="80" Content="LOGIN" Margin="80,0,60,0" Click="Login_Button" x:Name="LoginButton"/>
+                <ToggleButton  Height="40" Width="80" Content="REGISTER" x:Name="Register"/>
+            </StackPanel>
+            <StackPanel Visibility="Collapsed" x:Name="checkUsernameAndPasswordNotification"
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                <TextBlock Text="Check your username and password" 
+                           FontSize="15" 
+                           Foreground="Red"
+                           FontFamily="Helvetica"
+                           FontWeight="Light"
+                           Opacity="0.5"
+                           />
+            </StackPanel>
+            <StackPanel Visibility="Collapsed" x:Name="accountCreated"
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                <TextBlock Text="Account has been created successfully" 
+                           FontSize="15" 
+                           Foreground="Green"
+                           FontFamily="Helvetica"
+                           FontWeight="Light"
+                           Opacity="0.5"
+                           />
+            </StackPanel>
+            <StackPanel Visibility="Collapsed" x:Name="checkPasswords"
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                <TextBlock Text="Check passwords" 
+                           FontSize="15" 
+                           Foreground="Red"
+                           FontFamily="Helvetica"
+                           FontWeight="Light"
+                           Opacity="0.5"
+                           />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Width="20" Height="20"
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Top" 
+                        Content="-"
+                        VerticalContentAlignment="Center"
+                        Margin="0,2,2,0" Click="Minimized_Window"
+                        />
+                <Button Width="20" Height="20" 
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Top" 
+                        VerticalContentAlignment="Center"
+                        Content="X"
+                        Margin="0,2,2,0" Click="Shutdown_Window"
+                        />
+            </StackPanel>
+        </Grid>
+    </Grid>
 </Window>

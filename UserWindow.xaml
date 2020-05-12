@@ -7,7 +7,10 @@
         xmlns:sys="clr-namespace:System;assembly=System"
         mc:Ignorable="d"
         Title="UserWindow" Height="550" Width="900"
-        ResizeMode="CanMinimize"
+        AllowsTransparency="True" Background="Transparent"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        MouseDown="Window_MouseDown"
         >
 
     <Window.Resources>
@@ -106,26 +109,6 @@
             </Setter>
         </Style>
         <local:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
-        <Style TargetType="{x:Type ToggleButton}">
-            <Style.Triggers>
-                <MultiTrigger>
-                    <MultiTrigger.Conditions>
-                        <Condition Property="IsMouseOver" Value="True"/>
-                    </MultiTrigger.Conditions>
-                    <Setter Property="Cursor" Value="Hand"/>
-                </MultiTrigger>
-            </Style.Triggers>
-        </Style>
-        <Style TargetType="{x:Type Button}">
-            <Style.Triggers>
-                <MultiTrigger>
-                    <MultiTrigger.Conditions>
-                        <Condition Property="IsMouseOver" Value="True"/>
-                    </MultiTrigger.Conditions>
-                    <Setter Property="Cursor" Value="Hand"/>
-                </MultiTrigger>
-            </Style.Triggers>
-        </Style>
 
     </Window.Resources>
 
@@ -134,10 +117,37 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Image Source="Images/usermoney.jpg" Margin="227,108,361,23"/>
+
+        <Border CornerRadius="10" Grid.RowSpan="2">
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FFDF00" Offset="0.0"/>
+                    <GradientStop Color="#f083da" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Button Width="20" Height="20"
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Top" 
+                        Content="-"
+                        VerticalContentAlignment="Center"
+                        Margin="0,2,2,0" Click="Minimized_Window"
+                        />
+            <Button Width="20" Height="20" 
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Top" 
+                        VerticalContentAlignment="Center"
+                        Content="X"
+                        Margin="0,2,2,0" Click="Shutdown_Window"
+                        />
+        </StackPanel>
+        
 
 
         <Grid>
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="321"/>
@@ -186,10 +196,6 @@
                 <WrapPanel Margin="5" Background="Bisque">
                     <Label Content="User ID:" FontWeight="Bold" FontSize="20" Width="115"/>
                     <TextBlock x:Name="id" FontSize="15" HorizontalAlignment="Center" Width="186" VerticalAlignment="Center"></TextBlock>
-                </WrapPanel>
-                <WrapPanel Margin="5" Background="Bisque">
-                    <Label Content="Email:" FontWeight="Bold" FontSize="20" Width="79"/>
-                    <TextBlock x:Name="email" FontSize="15" HorizontalAlignment="Center" Width="220" VerticalAlignment="Center"></TextBlock>
                 </WrapPanel>
             </StackPanel>
         </Grid>
