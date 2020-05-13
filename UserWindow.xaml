@@ -126,7 +126,7 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        
+
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
             <Button Width="20" Height="20"
                         HorizontalAlignment="Right" 
@@ -143,11 +143,9 @@
                         Margin="0,2,2,0" Click="Shutdown_Window"
                         />
         </StackPanel>
-        
-
 
         <Grid>
-            
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="321"/>
@@ -250,7 +248,8 @@
                 <StackPanel  Visibility="{Binding ElementName=buttonToShowLifetimeRep, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
                     <DataGrid x:Name="lifetimeReportTable"
                               IsReadOnly="True"
-                              AutoGenerateColumns="False">
+                              AutoGenerateColumns="False"
+                              >
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="Type">
                                 <DataGridTemplateColumn.CellTemplate>

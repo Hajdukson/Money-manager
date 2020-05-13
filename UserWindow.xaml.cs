@@ -151,7 +151,7 @@ namespace UsersPanel
 
         private void IncomeAmount_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(incomeAmount.Text))
+            if (string.IsNullOrWhiteSpace(incomeAmount.Text))
             {
                 incomeAmount.Visibility = Visibility.Collapsed;
                 wahtermarkedTextInAmount.Visibility = Visibility.Visible;
@@ -167,7 +167,7 @@ namespace UsersPanel
 
         private void IncomeNotes_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(notesIncome.Text))
+            if (string.IsNullOrWhiteSpace(notesIncome.Text))
             {
                 notesIncome.Visibility = Visibility.Collapsed;
                 watermarkedTextInNotes.Visibility = Visibility.Visible;
@@ -182,7 +182,7 @@ namespace UsersPanel
         }
         private void OutcomeAmount_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(outcomeAmount.Text))
+            if (string.IsNullOrWhiteSpace(outcomeAmount.Text))
             {
                 outcomeAmount.Visibility = Visibility.Collapsed;
                 watermarkedTextOuAmount.Visibility = Visibility.Visible;
@@ -198,7 +198,7 @@ namespace UsersPanel
 
         private void OutcomeNotes_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(notesOutcome.Text))
+            if (string.IsNullOrWhiteSpace(notesOutcome.Text))
             {
                 notesOutcome.Visibility = Visibility.Collapsed;
                 watermarkedTextOuNotes.Visibility = Visibility.Visible;

@@ -35,15 +35,19 @@ namespace UsersPanel
                 userWindow.ShowDialog();
                 UsernameBox.Text = "Username";
                 PasswordBox.Password = "Account";
-                accountCreated.Visibility = Visibility.Collapsed;
+                allData.Visibility = Visibility.Collapsed;
                 checkPasswords.Visibility = Visibility.Collapsed;
-                checkUsernameAndPasswordNotification.Visibility = Visibility.Collapsed;
+                checkUsernameAndPassword.Visibility = Visibility.Collapsed;
+                accountCreated.Visibility = Visibility.Collapsed;
+                userExists.Visibility = Visibility.Collapsed;
             }
             else
             {
-                accountCreated.Visibility = Visibility.Collapsed;
+                allData.Visibility = Visibility.Collapsed;
                 checkPasswords.Visibility = Visibility.Collapsed;
-                checkUsernameAndPasswordNotification.Visibility = Visibility.Visible;
+                checkUsernameAndPassword.Visibility = Visibility.Visible;
+                accountCreated.Visibility = Visibility.Collapsed;
+                userExists.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -69,25 +73,45 @@ namespace UsersPanel
             if (string.IsNullOrWhiteSpace(UsernameBox.Text) || string.IsNullOrWhiteSpace(PasswordBox.Password) ||
                     string.IsNullOrWhiteSpace(PasswordBox2.Password) || PasswordBox2.Password == "Account" ||
                     PasswordBox.Password == "Account" || UsernameBox.Text == "Username")
-                MessageBox.Show("Enter all data.", "Warning", MessageBoxButton.OK);
+            { 
+                allData.Visibility = Visibility.Visible;
+                checkPasswords.Visibility = Visibility.Collapsed;
+                checkUsernameAndPassword.Visibility = Visibility.Collapsed;
+                accountCreated.Visibility = Visibility.Collapsed;
+                userExists.Visibility = Visibility.Collapsed;
+            }
             else if (PasswordBox.Password != PasswordBox2.Password)
+            { 
+                allData.Visibility = Visibility.Collapsed;
                 checkPasswords.Visibility = Visibility.Visible;
+                checkUsernameAndPassword.Visibility = Visibility.Collapsed;
+                accountCreated.Visibility = Visibility.Collapsed;
+                userExists.Visibility = Visibility.Collapsed;
+            }
             else
             {
                 if (!read.ThatUserExist(UsernameBox.Text))
                 {
                     write.AddUser(UsernameBox.Text, PasswordBox.Password);
-                    checkUsernameAndPasswordNotification.Visibility = Visibility.Collapsed;
+
+                    allData.Visibility = Visibility.Collapsed;
                     checkPasswords.Visibility = Visibility.Collapsed;
+                    checkUsernameAndPassword.Visibility = Visibility.Collapsed;
                     accountCreated.Visibility = Visibility.Visible;
+                    userExists.Visibility = Visibility.Collapsed;
                 }
                 else
-                    MessageBox.Show("That user exist.", "Warning", MessageBoxButton.OK);
-                checkUsernameAndPasswordNotification.Visibility = Visibility.Collapsed;
+                {
+                    allData.Visibility = Visibility.Collapsed;
+                    checkPasswords.Visibility = Visibility.Collapsed;
+                    checkUsernameAndPassword.Visibility = Visibility.Collapsed;
+                    accountCreated.Visibility = Visibility.Collapsed;
+                    userExists.Visibility = Visibility.Visible;
+                }
+                
                 UsernameBox.Text = "Username";
                 PasswordBox.Password = "Account";
                 PasswordBox2.Password = PasswordBox.Password;
-
             }
         }
     }

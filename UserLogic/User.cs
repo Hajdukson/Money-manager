@@ -17,7 +17,6 @@ namespace UsersPanel.UserLogic
             Id = id;
             Username = username;
             Password = password;
-           
         }
     }
 }

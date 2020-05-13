@@ -125,7 +125,9 @@
                 <Button  Height="40" Width="80" Content="LOGIN" Margin="80,0,60,0" Click="Login_Button" x:Name="LoginButton"/>
                 <ToggleButton  Height="40" Width="80" Content="REGISTER" x:Name="Register"/>
             </StackPanel>
-            <StackPanel Visibility="Collapsed" x:Name="checkUsernameAndPasswordNotification"
+            
+            <!--Notifications-->
+            <StackPanel Visibility="Collapsed" x:Name="checkUsernameAndPassword"
                         HorizontalAlignment="Center" VerticalAlignment="Bottom">
                 <TextBlock Text="Check your username and password" 
                            FontSize="15" 
@@ -155,7 +157,28 @@
                            Opacity="0.5"
                            />
             </StackPanel>
-
+            <StackPanel Visibility="Collapsed" x:Name="allData"
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                <TextBlock Text="Enter all data" 
+                           FontSize="15" 
+                           Foreground="Red"
+                           FontFamily="Helvetica"
+                           FontWeight="Light"
+                           Opacity="0.5"
+                           />
+            </StackPanel>
+            <StackPanel Visibility="Collapsed" x:Name="userExists"
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                <TextBlock Text="That user exists" 
+                           FontSize="15" 
+                           Foreground="Red"
+                           FontFamily="Helvetica"
+                           FontWeight="Light"
+                           Opacity="0.5"
+                           />
+            </StackPanel>
+            <!---->
+            
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Width="20" Height="20"
                         HorizontalAlignment="Right" 
