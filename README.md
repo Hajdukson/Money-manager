@@ -12,7 +12,6 @@ To develop this app, I instaled the [Icon Pack](https://www.nuget.org/packages/M
 
 ![image2](https://user-images.githubusercontent.com/58864931/81795127-10124380-950c-11ea-9bc0-f55f2d046f2a.png)  
 * Now user can manage his money and be happy knowing his month or lifetime balacne  
-*   
 
 ## How to run the application
 Open up your copy, compile or run the executable file under /Bin/Debug directory..
