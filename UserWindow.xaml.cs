@@ -29,13 +29,13 @@ namespace UsersPanel
         ObservableCollection<Item> _userItemsMonth;
         ObservableCollection<Item> _userItemWhole;
         IEnumerable<Item> _items;
-        private ItemType _itemType;
+        ItemType _itemType;
         Services _services = new Services();
 
         UserReader _readUser = new UserReader();
 
-        private string _dirToUser;
-        private int _userId;
+        string _dirToUser;
+        int _userId;
         public UserWindow(string username)
         {
             InitializeComponent();
@@ -51,6 +51,7 @@ namespace UsersPanel
                     id.Text = Convert.ToString(user.Id);
                 }
             }
+
             _dirToUser = Directory.GetCurrentDirectory() + @"\Users\" + username;
             _writeItem = new ItemWriter(_dirToUser);
             _itemReader = new ItemReader(_dirToUser);
@@ -68,6 +69,7 @@ namespace UsersPanel
             {
                 MessageBox.Show("Enter date and amount.", "Warning", MessageBoxButton.OK);
             }
+            
             incomeAmount.Clear();
             notesIncome.Clear();
         }
@@ -92,6 +94,7 @@ namespace UsersPanel
             _userItemsMonth = _services.ShowMothReport(_items);
             balanceMonth.Content = "Month Balance = " + _services.DispalyBalanceMonth(_items) + Environment.NewLine;
             monthReportTable.ItemsSource = _userItemsMonth;
+            comboBoxColumnMonth.ItemsSource = Enum.GetValues(typeof(ItemType));
         }
         private void HideMonthReport(object sender, RoutedEventArgs e)
         {
@@ -205,5 +208,10 @@ namespace UsersPanel
             }
         }
 
+        private void EditItems_Click(object sender, RoutedEventArgs e)
+        {
+            monthReportTable.IsReadOnly = false;
+            lifetimeReportTable.IsReadOnly = false;
+        }
     }
 }

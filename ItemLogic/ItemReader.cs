@@ -27,6 +27,7 @@ namespace UsersPanel.ItemLogic
             foreach (string line in lines)
             {
                 Item item = TextToItems(line);
+                
                 items.Add(item);
             }
 
@@ -40,8 +41,9 @@ namespace UsersPanel.ItemLogic
 
             if (item[0] == "O")
                 itemType = ItemType.Outcome;
-            
-            DateTime date = Convert.ToDateTime(item[1]);
+
+            string[] day = item[1].Split('-');
+            DateTime date = new DateTime(int.Parse(day[2]), int.Parse(day[1]), int.Parse(day[0]));
             decimal amout = Convert.ToDecimal(item[2]);
             string notes = item[3];
 

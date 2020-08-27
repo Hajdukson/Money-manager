@@ -150,7 +150,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="321"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Margin="10,16,367,35">
+            <StackPanel Grid.Column="0" Margin="10,16,366.667,0.333">
                 <ToggleButton Content="Income" x:Name="getIncome" Height="30" Margin="5"/>
                 <ToggleButton Content="Outcome" x:Name="getOutcome" Height="30" Margin="5"/>
 
@@ -158,10 +158,11 @@
                 <ToggleButton  Content="Show lifetime report"  Checked="ShowLifetimeReport" Unchecked="HideLifetimeReport" Height="30" Margin="5" x:Name="buttonToShowLifetimeRep"/>
 
                 <Button  Content="Delete account" Click="DeleateAccount" Height="30" Margin="5"/>
+                <Button  Content="Edit items" Click="EditItems_Click" Height="30" Margin="5"/>
             </StackPanel>
 
             <WrapPanel Visibility="{Binding ElementName=getIncome, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}" Margin="213,24,0,198">
-                <DatePicker  x:Name="incomeDate" Language="Engilish"/>
+                <DatePicker x:Name="incomeDate" Language="Engilish"/>
                 <Grid Width="Auto" Height="Auto">
                     <TextBox x:Name="incomeAmount" HorizontalAlignment="Left" Width="87" LostFocus="IncomeAmount_LostFocus"/>
                     <TextBox x:Name="wahtermarkedTextInAmount" Text="Amount" HorizontalAlignment="Left" Width="87" GotFocus="WmIncomeAmount_GotFocus"/>
@@ -210,34 +211,16 @@
                               IsReadOnly="True"
                               AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="Type">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Label Content="{Binding Path=Type}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Header="Amount">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Label Content="{Binding Path=Amount}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            <DataGridComboBoxColumn Header="Type" SelectedValueBinding="{Binding Path=Type}"  x:Name="comboBoxColumnMonth"/>
                             <DataGridTemplateColumn Header="Date">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Label ContentStringFormat="dd/MM/yyyy" Content="{Binding Path=Date}" VerticalAlignment="Top"/>
+                                        <TextBox Text="{Binding Path=Date, StringFormat=yyyy-MM-dd}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Header="Notes">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Label Content="{Binding Path=Notes}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Amount" Binding="{Binding Path=Amount}"/>
+                            <DataGridTextColumn Header="Notes" Binding="{Binding Path=Notes}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Label x:Name="balanceMonth" FontWeight="Bold"/>
@@ -248,39 +231,20 @@
                 <StackPanel  Visibility="{Binding ElementName=buttonToShowLifetimeRep, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}">
                     <DataGrid x:Name="lifetimeReportTable"
                               IsReadOnly="True"
-                              AutoGenerateColumns="False"
-                              >
+                              AutoGenerateColumns="True"
+                              CanUserReorderColumns="True">
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="Type">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Label  Content="{Binding Path=Type}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Header="Amount">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Label  Content="{Binding Path=Amount}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            <DataGridComboBoxColumn Header="Type" SelectedValueBinding="{Binding Path=Type}"  x:Name="comboBoxColumnYear"/>
                             <DataGridTemplateColumn Header="Date">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Label ContentStringFormat="dd/MM/yyyy" Content="{Binding Path=Date}"/>
+                                        <TextBox Text="{Binding Path=Date, StringFormat=yyyy-MM-dd}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Header="Notes">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Label Content="{Binding Path=Notes}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Amount" Binding="{Binding Path=Amount}"/>
+                            <DataGridTextColumn Header="Notes" Binding="{Binding Path=Notes}"/>
                         </DataGrid.Columns>
-
                     </DataGrid>
                     <Label x:Name="balanceLifetime" FontWeight="Bold"/>
                 </StackPanel>
