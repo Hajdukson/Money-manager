@@ -27,7 +27,19 @@ namespace UsersPanel.ItemLogic
                 File.WriteAllText(_dirToUser, ItemToTxt(item, itemType));
             }
             else
-                File.AppendAllText(_dirToUser, ItemToTxt(item, itemType));
+                File.AppendAllText(_dirToUser, ItemToTxt(item, itemType) + Environment.NewLine);
+        }
+        public List<string> ChangeItemsData(IEnumerable<Item> items)
+        {
+            List<string> lines = new List<string>();
+
+            foreach (var item in items)
+            {
+                lines.Add(ItemToTxt(item, item.Type));
+            }
+            File.Delete(_dirToUser);
+
+            return lines;
         }
         private string ItemToTxt(Item item, ItemType itemType)
         {

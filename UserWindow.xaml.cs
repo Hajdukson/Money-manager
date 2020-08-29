@@ -108,6 +108,7 @@ namespace UsersPanel
             _userItemWhole = _services.ShowLifetiemReport(_items);
             balanceLifetime.Content = "Lifetime Balance = " + _services.DispalyBalanceLifetime(_items) + Environment.NewLine;
             lifetimeReportTable.ItemsSource = _userItemWhole;
+            comboBoxColumnYear.ItemsSource = Enum.GetValues(typeof(ItemType));
 
         }
         private void HideLifetimeReport(object sender, RoutedEventArgs e)
@@ -128,6 +129,16 @@ namespace UsersPanel
                 MessageBox.Show("Your account has been deleted successfully", "Statment");
             }
         }
+        private void monthReportTable_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            ItemWriter itemWriter = new ItemWriter(_dirToUser);
+            File.WriteAllLines(_dirToUser, itemWriter.ChangeItemsData(_userItemsMonth));
+        }
+
+        private void lifetimeReportTable_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+
+        }
         private void Shutdown_Window(object sender, RoutedEventArgs e)
         {
             Close();
@@ -144,6 +155,7 @@ namespace UsersPanel
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
+
         // // // // // // // // // // // // // // // // // // // // // // // // Income watermarker
         private void WmIncomeAmount_GotFocus(object sender, RoutedEventArgs e)
         {
