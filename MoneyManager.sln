@@ -3,7 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyManager.Database", "..\MonayManager.Database\MoneyManager.Database.csproj", "{C5A38149-3486-415A-B819-D905A91C7E46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyManager.Domain", "..\MoneyManager.Domain\MoneyManager.Domain.csproj", "{E9380F27-8710-4D19-9716-AC7F83B68EAF}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5A38149-3486-415A-B819-D905A91C7E46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5A38149-3486-415A-B819-D905A91C7E46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5A38149-3486-415A-B819-D905A91C7E46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5A38149-3486-415A-B819-D905A91C7E46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9380F27-8710-4D19-9716-AC7F83B68EAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9380F27-8710-4D19-9716-AC7F83B68EAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9380F27-8710-4D19-9716-AC7F83B68EAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9380F27-8710-4D19-9716-AC7F83B68EAF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
