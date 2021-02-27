@@ -1,11 +1,11 @@
-﻿namespace MoneyManager.Domain.Models
+﻿using System.Collections.Generic;
+
+namespace MoneyManager.Domain.Models
 {
-    public class Account
+    public class Account : EntityObject
     {
-        public int Id { get; set; }
         public User AccountHolder { get; set; }
-        public decimal Income { get; set; }
-        public decimal Outcome { get; set; }
+        public List<Item> Items { get; set; }
         public double Balance { get; set; }
     }
 }
