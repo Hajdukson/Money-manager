@@ -13,12 +13,23 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Money manager"/>
+        <TextBlock Text="Money manager" Background="{StaticResource BrushPrimary1}" FontSize="18" Padding="10" Foreground="White"/>
 
-        <WrapPanel Grid.Row="1">
-            <RadioButton Content="Add item" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nvm:ViewType.AddingItem}"/>
-            <RadioButton Content="Summary" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nvm:ViewType.Summary}"/>
-        </WrapPanel>
+        <Grid Grid.Row="1" Background="{StaticResource BrushPrimary2}">
+            
+            <Grid.Resources>
+                <Style TargetType="RadioButton" BasedOn="{StaticResource NavButton}"/>
+            </Grid.Resources>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <RadioButton Grid.Column="0" Content="Add item" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nvm:ViewType.AddItem}"/>
+            <RadioButton Grid.Column="1" Content="Summary" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nvm:ViewType.Summary}"/>
+        </Grid>
+        
+            
 
     </Grid>
 </UserControl>

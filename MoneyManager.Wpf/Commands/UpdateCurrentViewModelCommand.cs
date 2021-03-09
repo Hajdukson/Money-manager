@@ -1,8 +1,6 @@
 ﻿using MoneyManager.Wpf.State.Navigators;
 using MoneyManager.Wpf.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 
 namespace MoneyManager.Wpf.Commands
@@ -16,12 +14,10 @@ namespace MoneyManager.Wpf.Commands
         {
             mNavigator = navigator;
         }
-
         public bool CanExecute(object parameter)
         {
             return true;
         }
-
         public void Execute(object parameter)
         {
             if(parameter is ViewType)
@@ -29,8 +25,8 @@ namespace MoneyManager.Wpf.Commands
                 ViewType viewType = (ViewType)parameter;
                 switch (viewType)
                 {
-                    case ViewType.AddingItem:
-                        mNavigator.CurrentViewModel = new AddingItemViewModel();
+                    case ViewType.AddItem:
+                        mNavigator.CurrentViewModel = new AddItemViewModel();
                         break;
                     case ViewType.Summary:
                         mNavigator.CurrentViewModel = new SummaryViewModel();

@@ -6,4 +6,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MonayManager.Database\MoneyManager.Database.csproj" />
+    <ProjectReference Include="..\MoneyManager.Domain\MoneyManager.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

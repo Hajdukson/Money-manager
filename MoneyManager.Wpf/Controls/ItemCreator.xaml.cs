@@ -1,5 +1,4 @@
-﻿using MoneyManager.Wpf.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -12,17 +11,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MoneyManager.Wpf.Views
+namespace MoneyManager.Wpf.Controls
 {
     /// <summary>
-    /// Interaction logic for AddingItemView.xaml
+    /// Interaction logic for ItemCreator.xaml
     /// </summary>
-    public partial class AddingItemView : UserControl
+    public partial class ItemCreator : UserControl
     {
-        public AddingItemView()
+        public ItemCreator()
         {
             InitializeComponent();
-            DataContext = new AddItemViewModel();
         }
     }
 }

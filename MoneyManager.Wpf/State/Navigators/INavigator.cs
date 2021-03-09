@@ -5,7 +5,7 @@ namespace MoneyManager.Wpf.State.Navigators
 {
     public enum ViewType
     {
-        AddingItem,
+        AddItem,
         Summary
     }
     public interface INavigator
