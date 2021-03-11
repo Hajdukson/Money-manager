@@ -10,6 +10,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/Common.xaml"/>
                 <ResourceDictionary Source="/Styles/NavigationBar.xaml"/>
+                <ResourceDictionary Source="/Styles/ItemCreator.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         
         
@@ -19,6 +20,7 @@
             <DataTemplate DataType="{x:Type viewmodels:SummaryViewModel}">
                 <view:SummaryView/>
             </DataTemplate>
+            
         </ResourceDictionary>
 
     </Application.Resources>

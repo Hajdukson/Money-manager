@@ -12,8 +12,8 @@
                 <ControlTemplate TargetType="RadioButton">
                     <Grid x:Name="gridMain" Background="{TemplateBinding Background}">
                         <TextBlock Text="{TemplateBinding Content}"
-                                   Foreground="{TemplateBinding Foreground}"
                                    Padding="{TemplateBinding Padding}"
+                                   FontSize="{TemplateBinding FontSize}"
                                    />
                     </Grid>
                     <ControlTemplate.Triggers>

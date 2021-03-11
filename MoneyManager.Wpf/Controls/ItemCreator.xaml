@@ -6,7 +6,43 @@
              xmlns:local="clr-namespace:MoneyManager.Wpf.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
+    <Border BorderBrush="Black" BorderThickness="1" Margin="20" CornerRadius="10">
+        <Grid VerticalAlignment="Center">
+            <Grid.Resources>
+                <Style TargetType="Label" BasedOn="{StaticResource ItemLabel}"/>
+                <Style TargetType="TextBox" BasedOn="{StaticResource ItemTextBox}"/>
+                <Style TargetType="ComboBox" BasedOn="{StaticResource ItemCombo}"/>
+            </Grid.Resources>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
 
-    </StackPanel>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Name:" Grid.Row="0"/>
+            <Label Content="Ammount:" Grid.Row="1"/>
+            <Label Content="Notes:" Grid.Row="2"/>
+            <Label Content="Item type:" Grid.Row="3"/>
+            <Label Content="Category:" Grid.Row="4"/>
+            <Label Content="Date:" Grid.Row="5"/>
+
+            <TextBox Text="Name" Grid.Row="0" Grid.Column="1"/>
+            <TextBox Text="Ammount" Grid.Row="1" Grid.Column="1"/>
+            <TextBox Text="Notes" Grid.Row="2" Grid.Column="1"/> <!--another small window-->
+            <ComboBox Text="Item type" Grid.Row="3" Grid.Column="1"/>
+            <ComboBox Text="Category" Grid.Row="4" Grid.Column="1"/>
+            <DatePickerTextBox Text="Date" Grid.Row="5" Grid.Column="1" Margin="5"/>
+
+            <Button Grid.Row="6"/>
+        </Grid>
+    </Border>
 </UserControl>

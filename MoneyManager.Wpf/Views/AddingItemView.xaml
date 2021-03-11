@@ -10,12 +10,11 @@
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <TextBlock Grid.Row="0"  Text="Add item"/>
-        <controls:ItemCreator DataContext="{Binding Item}" Grid.Row="1"/>
+        <!--<TextBlock Grid.Row="0"  Text="Add item"/>-->
+        <controls:ItemCreator Grid.Row="0"/>
 
 
     </Grid>
